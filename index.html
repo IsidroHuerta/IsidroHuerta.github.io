@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isidro Huerta — Consultoría en Liderazgo y Desarrollo Ejecutivo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1a2744;
+            --navy-light: #243656;
+            --gold: #c59b5f;
+            --gold-light: #d4b07a;
+            --white: #fafaf8;
+            --gray-light: #f0ede7;
+            --text: #2d2d2d;
+            --text-muted: #6b7280;
+            --text-light: #9ca3af;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            background: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========== NAVBAR ========== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(26, 39, 68, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: 0 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 68px;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-logo span {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-light);
+        }
+
+        .nav-cta {
+            background: var(--gold);
+            color: var(--navy) !important;
+            padding: 10px 22px !important;
+            border-radius: 4px;
+            font-weight: 600 !important;
+            transition: background 0.2s ease !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--gold-light) !important;
+            color: var(--navy) !important;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 68px;
+                left: 0;
+                right: 0;
+                background: var(--navy);
+                flex-direction: column;
+                padding: 24px 2rem;
+                gap: 18px;
+                border-bottom: 2px solid var(--gold);
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .nav-toggle {
+                display: block;
+            }
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--navy) 0%, #0f1b30 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 100px 2rem 80px;
+        }
+
+        .hero-accent {
+            position: absolute;
+            top: -100px;
+            right: -120px;
+            width: 500px;
+            height: 500px;
+            border: 2px solid rgba(197, 155, 95, 0.15);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-accent-2 {
+            position: absolute;
+            bottom: -80px;
+            left: -60px;
+            width: 300px;
+            height: 300px;
+            border: 2px solid rgba(197, 155, 95, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .hero-text {
+            color: var(--white);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(197, 155, 95, 0.15);
+            border: 1px solid rgba(197, 155, 95, 0.3);
+            color: var(--gold-light);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            padding: 8px 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h1 em {
+            color: var(--gold-light);
+            font-style: normal;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 36px;
+            max-width: 480px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gold);
+            color: var(--navy);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 15px 32px;
+            border-radius: 4px;
+            text-decoration: none;
+            letter-spacing: 0.2px;
+            transition: all 0.25s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(197, 155, 95, 0.25);
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--white);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 14px 32px;
+            border: 1.5px solid rgba(255,255,255,0.3);
+            border-radius: 4px;
+            text-decoration: none;
+            letter-spacing: 0.2px;
+            transition: all 0.25s ease;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--white);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .btn-outline-dark {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--navy);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 14px 32px;
+            border: 1.5px solid var(--navy);
+            border-radius: 4px;
+            text-decoration: none;
+            letter-spacing: 0.2px;
+            transition: all 0.25s ease;
+        }
+
+        .btn-outline-dark:hover {
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        .hero-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--gold);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+                padding-top: 40px;
+            }
+            .hero-text .subtitle {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .hero-image-wrapper {
+                width: 220px;
+                height: 220px;
+                margin: 0 auto;
+            }
+        }
+
+        /* ========== SECTION STYLES ========== */
+        .section {
+            padding: 100px 0;
+        }
+        .section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .section-tag {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-tag::before {
+            content: '';
+            flex: 0 0 28px;
+            height: 2px;
+            background: var(--gold);
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            color: var(--navy);
+            margin-bottom: 16px;
+        }
+        .section-title em {
+            color: var(--gold);
+            font-style: normal;
+        }
+        .section-lead {
+            font-size: 1.05rem;
+            font-weight: 300;
+            line-height: 1.8;
+            color: var(--text-muted);
+            max-width: 600px;
+        }
+        .section-alt {
+            background: var(--gray-light);
+        }
+
+        /* ========== ABOUT ========== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 60px;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .about-image {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 3/4;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+        }
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .about-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 16px;
+        }
+        .about-text p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+        .about-quote {
+            margin-top: 24px;
+            padding: 20px 24px;
+            border-left: 3px solid var(--gold);
+            background: rgba(197, 155, 95, 0.05);
+            border-radius: 0 4px 4px 0;
+        }
+        .about-quote p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--navy);
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .about-image {
+                aspect-ratio: 1/1;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+        }
+
+        /* ========== BOOK ========== */
+        .book-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 60px;
+            align-items: start;
+            margin-top: 50px;
+        }
+        .book-cover {
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+            aspect-ratio: 5/7;
+        }
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .book-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+        .book-meta {
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .book-info p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .book-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .book-cover {
+                max-width: 240px;
+                margin: 0 auto;
+            }
+            .book-info {
+                text-align: center;
+            }
+        }
+
+        /* ========== SERVICES ========== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+            margin-top: 50px;
+        }
+        .service-card {
+            background: var(--white);
+            padding: 40px 32px;
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gold);
+            transition: width 0.35s ease;
+        }
+        .service-card:hover {
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+        .service-card:hover::after {
+            width: 100%;
+        }
+        .service-icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+        .service-card p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        /* ========== QUOTE SECTION ========== */
+        .quote-section {
+            background: var(--navy);
+            padding: 80px 0;
+            text-align: center;
+        }
+        .quote-inner {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .quote-inner blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+            font-weight: 400;
+            font-style: italic;
+            color: var(--white);
+            line-height: 1.6;
+            position: relative;
+        }
+        .quote-inner blockquote::before {
+            content: '"';
+            font-size: 5rem;
+            color: var(--gold);
+            position: absolute;
+            top: -30px;
+            left: -20px;
+            opacity: 0.6;
+            font-family: 'Playfair Display', serif;
+        }
+        .quote-author {
+            color: var(--gold-light);
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-top: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        /* ========== BLOG PREVIEW ========== */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+            margin-top: 50px;
+        }
+        .blog-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+        }
+        .blog-card:hover {
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+        .blog-card-content {
+            padding: 28px 24px;
+        }
+        .blog-card-date {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        .blog-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        .blog-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .blog-card a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .blog-card a:hover {
+            color: var(--navy);
+        }
+
+        /* ========== CONTACT ========== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 50px;
+            align-items: start;
+        }
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 16px;
+        }
+        .contact-info p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 0.95rem;
+            color: var(--navy);
+        }
+        .contact-method a {
+            color: var(--navy);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .contact-method a:hover {
+            color: var(--gold);
+        }
+        .contact-form {
+            background: var(--white);
+            padding: 36px;
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px 16px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: border-color 0.2s;
+            background: var(--white);
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+        .contact-form button {
+            background: var(--navy);
+            color: var(--white);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 15px 32px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            transition: all 0.25s;
+            width: 100%;
+        }
+        .contact-form button:hover {
+            background: var(--navy-light);
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--navy);
+            padding: 40px 0;
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+        footer span {
+            color: var(--gold-light);
+        }
+
+        /* ========== TESTIMONIALS HIDDEN ========== */
+        .testimonials-section {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">Isidro <span>Huerta</span></a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">&#9776;</button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#sobre-mi">Sobre mí</a></li>
+                <li><a href="#libro">Libro</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#blog">Reflexiones</a></li>
+                <li><a href="#contacto" class="nav-cta">Contactar</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="hero">
+        <div class="hero-accent" aria-hidden="true"></div>
+        <div class="hero-accent-2" aria-hidden="true"></div>
+        <div class="hero-inner">
+            <div class="hero-text">
+                <span class="hero-badge">20+ años de experiencia</span>
+                <h1>Potencia tu <em>liderazgo</em> y el de tu equipo</h1>
+                <p class="subtitle">
+                    Consultoría ejecutiva, conferencias y capacitación in-company. 
+                    Ayudo a líderes a encontrar su voz auténtica y a equipos a alcanzar su máximo potencial.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contacto" class="btn-primary">
+                        Agenda una sesión
+                    </a>
+                    <a href="#servicios" class="btn-outline">
+                        Conoce mis servicios
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image-container">
+                <div class="hero-image-wrapper">
+                    <img src="assets/img/Inicial.jpg" alt="Isidro Huerta — Consultor en Liderazgo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== ABOUT ==================== -->
+    <section class="section" id="sobre-mi">
+        <div class="section-inner">
+            <span class="section-tag">Sobre mí</span>
+            <h2 class="section-title">Más de dos décadas <em>transformando</em> líderes</h2>
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="assets/img/isidro.jpg.jpg" alt="Isidro Huerta">
+                </div>
+                <div class="about-text">
+                    <h3>Isidro Huerta</h3>
+                    <p>
+                        Durante más de 20 años he trabajado con ejecutivos, emprendedores y equipos 
+                        de alto rendimiento en México y Latinoamérica. Mi enfoque combina inteligencia 
+                        emocional, pensamiento estratégico y una profunda comprensión de la naturaleza humana.
+                    </p>
+                    <p>
+                        Como facilitador y consultor, he ayudado a cientos de profesionales a descubrir 
+                        su valor auténtico, superar el síndrome del impostor y comunicar su mensaje 
+                        con claridad y convicción.
+                    </p>
+                    <div class="about-quote">
+                        <p>"Si nosotros no creemos en nosotros, ¿por qué la gente tendría que confiar?"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== BOOK ==================== -->
+    <section class="section section-alt" id="libro">
+        <div class="section-inner">
+            <span class="section-tag">Publicación</span>
+            <h2 class="section-title">Mi <em>libro</em></h2>
+            <p class="section-lead">Una obra que sienta las bases del crecimiento personal y el liderazgo auténtico.</p>
+            <div class="book-grid">
+                <div class="book-cover">
+                    <!-- REEMPLAZA ESTA RUTA POR LA PORTADA REAL DEL LIBRO -->
+                    <img src="assets/img/libroportada.jpg" alt="Portada del libro Cimientos para el Desarrollo Personal">
+                </div>
+                <div class="book-info">
+                    <h3>Cimientos para el Desarrollo Personal</h3>
+                    <p class="book-meta">
+                        Publicado en 2011 &middot; Editor: Octavio Colmenares y Vargas<br>
+                        Derechos Reservados © Isidro Huerta Pérez
+                    </p>
+                    <p>
+                        Una obra que sienta las bases para el crecimiento personal y profesional. 
+                        En sus páginas, Isidro comparte las herramientas y reflexiones que han 
+                        guiado a cientos de ejecutivos y líderes en su camino hacia una vida 
+                        más plena y un liderazgo más auténtico.
+                    </p>
+                    <p>
+                        Este libro es el reflejo de más de dos décadas de experiencia facilitando 
+                        procesos de transformación personal y organizacional.
+                    </p>
+                    <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 20px;">
+                        <a href="https://www.amazon.com.mx/Cimientos-para-Desarrollo-Personal-Ejecutivo-ebook/dp/B076YTGGG3" target="_blank" class="btn-primary">
+                            📱 Conseguir eBook en Amazon
+                        </a>
+                        <a href="#contacto" class="btn-outline-dark">
+                            Solicitar ejemplar físico
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SERVICES ==================== -->
+    <section class="section" id="servicios">
+        <div class="section-inner">
+            <span class="section-tag">Servicios</span>
+            <h2 class="section-title">Cómo puedo <em>ayudarte</em></h2>
+            <p class="section-lead">Soluciones personalizadas para cada etapa de tu desarrollo profesional y el de tu organización.</p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🎯</div>
+                    <h3>Consultoría Ejecutiva 1:1</h3>
+                    <p>
+                        Sesiones personalizadas para líderes que buscan claridad, 
+                        confianza y una estrategia para comunicar su valor. Trabajamos 
+                        juntos para que te "compres" antes de venderte.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎤</div>
+                    <h3>Conferencias y Keynotes</h3>
+                    <p>
+                        Presentaciones de alto impacto sobre liderazgo, inteligencia 
+                        emocional, síndrome del impostor y el poder del autoconocimiento. 
+                        Para eventos corporativos, congresos y universidades.
+                    </p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👥</div>
+                    <h3>Capacitación In-Company</h3>
+                    <p>
+                        Programas diseñados a la medida de tu empresa. Desarrollo de 
+                        habilidades de liderazgo, comunicación efectiva y trabajo en 
+                        equipo para todos los niveles organizacionales.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== QUOTE ==================== -->
+    <section class="quote-section">
+        <div class="quote-inner">
+            <blockquote>
+                Antes de vender, cómprate. Se necesita un verdadero ejercicio de 
+                introspección para dimensionar nuestro valor, nuestras competencias 
+                y nuestra experiencia.
+            </blockquote>
+            <p class="quote-author">— Isidro Huerta</p>
+        </div>
+    </section>
+
+    <!-- ==================== BLOG PREVIEW ==================== -->
+    <section class="section" id="blog">
+        <div class="section-inner">
+            <span class="section-tag">Reflexiones</span>
+            <h2 class="section-title">Lo último del <em>blog</em></h2>
+            <p class="section-lead">Ideas, reflexiones y herramientas para tu crecimiento personal y profesional.</p>
+
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-card-content">
+                        <span class="blog-card-date">Artículo destacado</span>
+                        <h3>¿Te vendes o te Dejas Comprar?</h3>
+                        <p>
+                            La verdadera pregunta cuando se trata de una entrevista de trabajo 
+                            o de realizar una venta, ya sea de un producto, servicio o de una idea.
+                        </p>
+                        <a href="https://www.isidrohuerta.com" target="_blank">Leer más →</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-card-content">
+                        <span class="blog-card-date">Próximamente</span>
+                        <h3>El Síndrome del Impostor en el Liderazgo</h3>
+                        <p>
+                            Afecta principalmente a personas exitosas y competitivas. 
+                            ¿Cómo identificarlo y superarlo?
+                        </p>
+                        <a href="#blog">Próximamente →</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-card-content">
+                        <span class="blog-card-date">Próximamente</span>
+                        <h3>La Pausa como Estrategia de Liderazgo</h3>
+                        <p>
+                            Encontremos pausas en nuestro día a día para generar mejores 
+                            pensamientos y tomar mejores decisiones.
+                        </p>
+                        <a href="#blog">Próximamente →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section class="section section-alt" id="contacto">
+        <div class="section-inner">
+            <span class="section-tag">Contacto</span>
+            <h2 class="section-title">Hablemos de <em>tu proyecto</em></h2>
+            <p class="section-lead">Estoy listo para ayudarte. Escríbeme y conversemos sobre tus objetivos.</p>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Información de contacto</h3>
+                    <p>
+                        Ya sea que necesites una consultoría personalizada, una conferencia 
+                        para tu empresa o un programa de capacitación, estaré encantado de escucharte.
+                    </p>
+                    <div class="contact-method">
+                        📧 <a href="mailto:isidro@isidrohuerta.com">isidro@isidrohuerta.com</a>
+                    </div>
+                    <div class="contact-method">
+                        📍 Puebla, México
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form action="#" method="POST">
+                        <input type="text" name="nombre" placeholder="Tu nombre" required>
+                        <input type="email" name="email" placeholder="Tu correo electrónico" required>
+                        <textarea name="mensaje" rows="4" placeholder="Cuéntame sobre tu proyecto o interés..." required></textarea>
+                        <button type="submit">Enviar mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <p>&copy; 2025 <span>Isidro Huerta</span>. Todos los derechos reservados. | Consultoría en Liderazgo y Desarrollo Ejecutivo</p>
+    </footer>
+
+    <!-- ==================== MOBILE NAV SCRIPT ==================== -->
+    <script>
+        const navToggle = document.getElementById('nav-toggle');
+        const navLinks = document.getElementById('nav-links');
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+            });
+        });
+    </script>
+
+</body>
+</html>
