@@ -1,1017 +1,715 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Isidro Huerta — Consultoría en Liderazgo y Desarrollo Ejecutivo</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --navy: #1a2744;
-            --navy-light: #243656;
-            --gold: #c59b5f;
-            --gold-light: #d4b07a;
-            --white: #fafaf8;
-            --gray-light: #f0ede7;
-            --text: #2d2d2d;
-            --text-muted: #6b7280;
-            --text-light: #9ca3af;
-        }
-
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            color: var(--text);
-            background: var(--white);
-            line-height: 1.7;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ========== NAVBAR ========== */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            background: rgba(26, 39, 68, 0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            padding: 0 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .nav-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 68px;
-        }
-
-        .nav-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--white);
-            text-decoration: none;
-            letter-spacing: -0.3px;
-        }
-
-        .nav-logo span {
-            color: var(--gold);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 28px;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: rgba(255,255,255,0.75);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            transition: color 0.2s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--gold-light);
-        }
-
-        .nav-cta {
-            background: var(--gold);
-            color: var(--navy) !important;
-            padding: 10px 22px !important;
-            border-radius: 4px;
-            font-weight: 600 !important;
-            transition: background 0.2s ease !important;
-        }
-
-        .nav-cta:hover {
-            background: var(--gold-light) !important;
-            color: var(--navy) !important;
-        }
-
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 1.6rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 68px;
-                left: 0;
-                right: 0;
-                background: var(--navy);
-                flex-direction: column;
-                padding: 24px 2rem;
-                gap: 18px;
-                border-bottom: 2px solid var(--gold);
-            }
-            .nav-links.open {
-                display: flex;
-            }
-            .nav-toggle {
-                display: block;
-            }
-        }
-
-        /* ========== HERO ========== */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, var(--navy) 0%, #0f1b30 100%);
-            position: relative;
-            overflow: hidden;
-            padding: 100px 2rem 80px;
-        }
-
-        .hero-accent {
-            position: absolute;
-            top: -100px;
-            right: -120px;
-            width: 500px;
-            height: 500px;
-            border: 2px solid rgba(197, 155, 95, 0.15);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .hero-accent-2 {
-            position: absolute;
-            bottom: -80px;
-            left: -60px;
-            width: 300px;
-            height: 300px;
-            border: 2px solid rgba(197, 155, 95, 0.1);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .hero-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-            width: 100%;
-        }
-
-        .hero-text {
-            color: var(--white);
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: rgba(197, 155, 95, 0.15);
-            border: 1px solid rgba(197, 155, 95, 0.3);
-            color: var(--gold-light);
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            padding: 8px 16px;
-            border-radius: 4px;
-            margin-bottom: 24px;
-        }
-
-        .hero-text h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.8rem, 5vw, 4rem);
-            font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -1px;
-            margin-bottom: 20px;
-        }
-
-        .hero-text h1 em {
-            color: var(--gold-light);
-            font-style: normal;
-        }
-
-        .hero-text .subtitle {
-            font-size: 1.1rem;
-            font-weight: 300;
-            line-height: 1.8;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 36px;
-            max-width: 480px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--gold);
-            color: var(--navy);
-            font-weight: 600;
-            font-size: 0.95rem;
-            padding: 15px 32px;
-            border-radius: 4px;
-            text-decoration: none;
-            letter-spacing: 0.2px;
-            transition: all 0.25s ease;
-        }
-
-        .btn-primary:hover {
-            background: var(--gold-light);
-            transform: translateY(-1px);
-            box-shadow: 0 8px 24px rgba(197, 155, 95, 0.25);
-        }
-
-        .btn-outline {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: transparent;
-            color: var(--white);
-            font-weight: 500;
-            font-size: 0.95rem;
-            padding: 14px 32px;
-            border: 1.5px solid rgba(255,255,255,0.3);
-            border-radius: 4px;
-            text-decoration: none;
-            letter-spacing: 0.2px;
-            transition: all 0.25s ease;
-        }
-
-        .btn-outline:hover {
-            border-color: var(--white);
-            background: rgba(255,255,255,0.05);
-        }
-
-        .btn-outline-dark {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: transparent;
-            color: var(--navy);
-            font-weight: 500;
-            font-size: 0.95rem;
-            padding: 14px 32px;
-            border: 1.5px solid var(--navy);
-            border-radius: 4px;
-            text-decoration: none;
-            letter-spacing: 0.2px;
-            transition: all 0.25s ease;
-        }
-
-        .btn-outline-dark:hover {
-            background: var(--navy);
-            color: var(--white);
-        }
-
-        .hero-image-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero-image-wrapper {
-            position: relative;
-            width: 320px;
-            height: 320px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 4px solid var(--gold);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        .hero-image-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        @media (max-width: 768px) {
-            .hero-inner {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                text-align: center;
-                padding-top: 40px;
-            }
-            .hero-text .subtitle {
-                max-width: 100%;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .hero-buttons {
-                justify-content: center;
-            }
-            .hero-image-wrapper {
-                width: 220px;
-                height: 220px;
-                margin: 0 auto;
-            }
-        }
-
-        /* ========== SECTION STYLES ========== */
-        .section {
-            padding: 100px 0;
-        }
-        .section-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        .section-tag {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .section-tag::before {
-            content: '';
-            flex: 0 0 28px;
-            height: 2px;
-            background: var(--gold);
-        }
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 3.5vw, 2.8rem);
-            font-weight: 700;
-            line-height: 1.2;
-            letter-spacing: -0.5px;
-            color: var(--navy);
-            margin-bottom: 16px;
-        }
-        .section-title em {
-            color: var(--gold);
-            font-style: normal;
-        }
-        .section-lead {
-            font-size: 1.05rem;
-            font-weight: 300;
-            line-height: 1.8;
-            color: var(--text-muted);
-            max-width: 600px;
-        }
-        .section-alt {
-            background: var(--gray-light);
-        }
-
-        /* ========== ABOUT ========== */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 60px;
-            align-items: center;
-            margin-top: 50px;
-        }
-        .about-image {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 3/4;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 16px 48px rgba(0,0,0,0.12);
-        }
-        .about-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .about-text h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--navy);
-            margin-bottom: 16px;
-        }
-        .about-text p {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            color: var(--text-muted);
-            margin-bottom: 14px;
-        }
-        .about-quote {
-            margin-top: 24px;
-            padding: 20px 24px;
-            border-left: 3px solid var(--gold);
-            background: rgba(197, 155, 95, 0.05);
-            border-radius: 0 4px 4px 0;
-        }
-        .about-quote p {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            font-style: italic;
-            color: var(--navy);
-            margin-bottom: 0;
-        }
-
-        @media (max-width: 768px) {
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
-            .about-image {
-                aspect-ratio: 1/1;
-                max-width: 300px;
-                margin: 0 auto;
-            }
-        }
-
-        /* ========== BOOK ========== */
-        .book-grid {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 60px;
-            align-items: start;
-            margin-top: 50px;
-        }
-        .book-cover {
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.18);
-            aspect-ratio: 5/7;
-        }
-        .book-cover img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .book-info h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--navy);
-            margin-bottom: 8px;
-        }
-        .book-meta {
-            font-size: 0.85rem;
-            color: var(--gold);
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        .book-info p {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            color: var(--text-muted);
-            margin-bottom: 14px;
-        }
-
-        @media (max-width: 768px) {
-            .book-grid {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
-            .book-cover {
-                max-width: 240px;
-                margin: 0 auto;
-            }
-            .book-info {
-                text-align: center;
-            }
-        }
-
-        /* ========== SERVICES ========== */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 28px;
-            margin-top: 50px;
-        }
-        .service-card {
-            background: var(--white);
-            padding: 40px 32px;
-            border-radius: 8px;
-            border: 1px solid rgba(0,0,0,0.06);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .service-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: var(--gold);
-            transition: width 0.35s ease;
-        }
-        .service-card:hover {
-            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-            transform: translateY(-2px);
-        }
-        .service-card:hover::after {
-            width: 100%;
-        }
-        .service-icon {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-        .service-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--navy);
-            margin-bottom: 10px;
-        }
-        .service-card p {
-            font-size: 0.9rem;
-            line-height: 1.7;
-            color: var(--text-muted);
-        }
-
-        /* ========== QUOTE SECTION ========== */
-        .quote-section {
-            background: var(--navy);
-            padding: 80px 0;
-            text-align: center;
-        }
-        .quote-inner {
-            max-width: 750px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        .quote-inner blockquote {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.4rem, 2.5vw, 1.8rem);
-            font-weight: 400;
-            font-style: italic;
-            color: var(--white);
-            line-height: 1.6;
-            position: relative;
-        }
-        .quote-inner blockquote::before {
-            content: '"';
-            font-size: 5rem;
-            color: var(--gold);
-            position: absolute;
-            top: -30px;
-            left: -20px;
-            opacity: 0.6;
-            font-family: 'Playfair Display', serif;
-        }
-        .quote-author {
-            color: var(--gold-light);
-            font-weight: 500;
-            font-size: 0.95rem;
-            margin-top: 20px;
-            letter-spacing: 0.3px;
-        }
-
-        /* ========== BLOG PREVIEW ========== */
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 28px;
-            margin-top: 50px;
-        }
-        .blog-card {
-            background: var(--white);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.06);
-            transition: all 0.3s ease;
-        }
-        .blog-card:hover {
-            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-            transform: translateY(-2px);
-        }
-        .blog-card-content {
-            padding: 28px 24px;
-        }
-        .blog-card-date {
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 10px;
-        }
-        .blog-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--navy);
-            margin-bottom: 10px;
-            line-height: 1.3;
-        }
-        .blog-card p {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 16px;
-        }
-        .blog-card a {
-            color: var(--gold);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
-        .blog-card a:hover {
-            color: var(--navy);
-        }
-
-        /* ========== CONTACT ========== */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            margin-top: 50px;
-            align-items: start;
-        }
-        .contact-info h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--navy);
-            margin-bottom: 16px;
-        }
-        .contact-info p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-        .contact-method {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 14px;
-            font-size: 0.95rem;
-            color: var(--navy);
-        }
-        .contact-method a {
-            color: var(--navy);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .contact-method a:hover {
-            color: var(--gold);
-        }
-        .contact-form {
-            background: var(--white);
-            padding: 36px;
-            border-radius: 8px;
-            border: 1px solid rgba(0,0,0,0.06);
-        }
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 14px 16px;
-            margin-bottom: 16px;
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 4px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            transition: border-color 0.2s;
-            background: var(--white);
-        }
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            outline: none;
-            border-color: var(--gold);
-        }
-        .contact-form button {
-            background: var(--navy);
-            color: var(--white);
-            font-weight: 600;
-            font-size: 0.95rem;
-            padding: 15px 32px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            letter-spacing: 0.3px;
-            transition: all 0.25s;
-            width: 100%;
-        }
-        .contact-form button:hover {
-            background: var(--navy-light);
-        }
-
-        @media (max-width: 768px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-        }
-
-        /* ========== FOOTER ========== */
-        footer {
-            background: var(--navy);
-            padding: 40px 0;
-            text-align: center;
-            color: rgba(255,255,255,0.5);
-            font-size: 0.85rem;
-        }
-        footer span {
-            color: var(--gold-light);
-        }
-
-        /* ========== TESTIMONIALS HIDDEN ========== */
-        .testimonials-section {
-            display: none;
-        }
-    </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Cenit Comunicaciones &#xB7; Isidro Huerta</title>
+    <meta name="description" content="Consultor&#xED;a, mentor&#xED;a ejecutiva, cursos y conferencias de comunicaci&#xF3;n y liderazgo con Isidro Huerta, fundador y CEO de Cenit Comunicaciones." />
+    <meta property="og:title" content="Cenit Comunicaciones &#xB7; Isidro Huerta" />
+    <meta property="og:description" content="Consultor&#xED;a, mentor&#xED;a ejecutiva, cursos y conferencias de comunicaci&#xF3;n y liderazgo con Isidro Huerta, fundador y CEO de Cenit Comunicaciones." />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#1a2340" />
+    <link rel="preload" href="/img/cenit-logo-blanco.svg" as="image" />
+    <link rel="stylesheet" href="/lib/archivo/archivo.css" />
+    <link rel="stylesheet" href="/lib/inter/inter.css" />
+    <link rel="stylesheet" href="/css/cenit.css?v=Ry5DyrSQDbYbBgVZlXgPZFQcPErw0R7fAEncHwg9FHQ" />
+    
+    <script>document.documentElement.classList.add('js');</script>
 </head>
-<body>
+<body class="nav-sobre-oscuro">
+<a class="saltar" href="#contenido">Saltar al contenido</a>
 
-    <!-- ==================== NAVBAR ==================== -->
-    <nav>
-        <div class="nav-inner">
-            <a href="#" class="nav-logo">Isidro <span>Huerta</span></a>
-            <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">&#9776;</button>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#sobre-mi">Sobre mí</a></li>
-                <li><a href="#libro">Libro</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#blog">Reflexiones</a></li>
-                <li><a href="#contacto" class="nav-cta">Contactar</a></li>
-            </ul>
-        </div>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Cenit Comunicaciones, inicio">
+      <img class="logo-claro" src="/img/cenit-logo-blanco.svg" alt="" width="601" height="240">
+      <img class="logo-navy" src="/img/cenit-logo-navy.svg" alt="" width="601" height="240">
+    </a>
+    <nav class="links" aria-label="Secciones">
+      <a href="#plataforma">Plataforma</a>
+      <a href="/presentaciones/">Contenido libre</a>
+      <a href="#formas">Mentorías</a>
+      <a href="#isidro">Isidro Huerta</a>
+      <a href="#empresas">Empresas</a>
     </nav>
+    <div class="nav-r">
+      <a class="btn primary sm" href="#contacto">Contáctame</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu-movil" id="menuBtn">
+        <span class="sr">Menú</span><i></i><i></i>
+      </button>
+    </div>
+  </div>
+  <div class="menu-movil" id="menu-movil" hidden>
+    <a href="#plataforma">Plataforma</a>
+    <a href="/presentaciones/">Contenido libre</a>
+    <a href="#formas">Mentorías</a>
+    <a href="#isidro">Isidro Huerta</a>
+    <a href="#empresas">Empresas</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+</header>
 
-    <!-- ==================== HERO ==================== -->
-    <section class="hero">
-        <div class="hero-accent" aria-hidden="true"></div>
-        <div class="hero-accent-2" aria-hidden="true"></div>
-        <div class="hero-inner">
-            <div class="hero-text">
-                <span class="hero-badge">20+ años de experiencia</span>
-                <h1>Potencia tu <em>liderazgo</em> y el de tu equipo</h1>
-                <p class="subtitle">
-                    Consultoría ejecutiva, conferencias y capacitación in-company. 
-                    Ayudo a líderes a encontrar su voz auténtica y a equipos a alcanzar su máximo potencial.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#contacto" class="btn-primary">
-                        Agenda una sesión
-                    </a>
-                    <a href="#servicios" class="btn-outline">
-                        Conoce mis servicios
-                    </a>
-                </div>
+<main id="contenido">
+
+<!-- ================= PORTADA: el cenit ================= -->
+<section class="hero" id="inicio" aria-labelledby="t-hero">
+  <div class="cielo" id="cielo" aria-hidden="true"></div>
+  <div class="wrap hero-in">
+    <h1 id="t-hero">Comunicar mejor es liderar mejor.</h1>
+    <p class="sub">Consultoría, mentoría y capacitación con Isidro Huerta, fundador de Cenit Comunicaciones, para que líderes y equipos hablen, vendan y conecten con más impacto.</p>
+    <div class="ctas">
+      <a class="btn gold" href="#plataforma">Mira cómo trabajamos</a>
+      <a class="btn ghost" href="#contacto">Contáctame</a>
+    </div>
+  </div>
+  <ul class="hero-facts wrap" aria-label="En resumen">
+    <li><b>Más de 20 años</b><span>desarrollando líderes, vendedores y equipos</span></li>
+    <li><b>Más de 30 años</b><span>en la aviación comercial internacional</span></li>
+    <li><b>Certificado STPS y SEP</b><span>capacitador externo y locutor profesional</span></li>
+  </ul>
+</section>
+
+<!-- ================= PLATAFORMA EN VIDEO ================= -->
+<section class="s" id="plataforma" aria-labelledby="t-demo">
+  <div class="wrap">
+    <div class="head rv">
+      <h2 id="t-demo">Tu proceso, en una sola plataforma.</h2>
+      <p class="lead">Sesiones, tareas, contenido y la conversación con tu mentor, en el celular o la computadora. Así se ve por dentro, grabado en la plataforma real.</p>
+    </div>
+
+    <div class="demo rv" id="demo">
+      <div class="steps" role="tablist" aria-label="Funciones de la plataforma">
+          <button class="step" role="tab" id="tab-panel" aria-selected="true" aria-controls="stage" data-i="0" tabindex="0">
+            <span class="n">1</span><span class="t">Panel del mentor</span>
+            <span class="d">Al entrar, Isidro ve qui&#xE9;n necesita atenci&#xF3;n hoy: seguimientos vencidos, tareas por revisar, sesiones y renovaciones.</span>
+            <ul> <li>Pr&#xF3;ximas acciones por cliente</li>  <li>Panel de atenci&#xF3;n y agenda</li>  <li>Avisos y b&#xFA;squeda global</li> </ul>
+            <span class="prog" aria-hidden="true"><i></i></span>
+          </button>
+          <button class="step" role="tab" id="tab-alta" aria-selected="false" aria-controls="stage" data-i="1" tabindex="-1">
+            <span class="n">2</span><span class="t">Alta de un mentorado</span>
+            <span class="d">Registrar a alguien toma un minuto: la plataforma genera su contrase&#xF1;a, te da el mensaje listo para enviarle y te lleva a asignar su primera tarea.</span>
+            <ul> <li>Contrase&#xF1;a temporal sugerida</li>  <li>Mensaje de acceso para copiar o enviar por WhatsApp</li>  <li>Primera tarea con aviso al mentorado</li> </ul>
+            <span class="prog" aria-hidden="true"><i></i></span>
+          </button>
+          <button class="step" role="tab" id="tab-embudo" aria-selected="false" aria-controls="stage" data-i="2" tabindex="-1">
+            <span class="n">3</span><span class="t">CRM y seguimientos</span>
+            <span class="d">Cada cliente avanza de prospecto a activo arrastrando su tarjeta, y los seguimientos se ordenan solos: vencidos, hoy y esta semana.</span>
+            <ul> <li>Embudo por etapa con totales</li>  <li>Seguimientos por fecha</li>  <li>Historial de cada cliente</li> </ul>
+            <span class="prog" aria-hidden="true"><i></i></span>
+          </button>
+          <button class="step" role="tab" id="tab-mentorado" aria-selected="false" aria-controls="stage" data-i="3" tabindex="-1">
+            <span class="n">4</span><span class="t">La app del mentorado</span>
+            <span class="d">El mentorado sabe qu&#xE9; sigue: su pr&#xF3;xima tarea, su avance y un chat directo con su mentor. Se instala en el celular como una app.</span>
+            <ul> <li>Tu siguiente paso y cumplimiento</li>  <li>Tareas con un toque</li>  <li>Chat con notas de voz y archivos</li> </ul>
+            <span class="prog" aria-hidden="true"><i></i></span>
+          </button>
+      </div>
+      <div class="stage" id="stage" role="tabpanel" aria-labelledby="tab-panel">
+          <figure class="device desk on" data-i="0" data-ui>
+ <div class="device-bar" aria-hidden="true"><i></i><i></i><i></i><span>cenit-comunicaciones.com</span></div>             <div class="screen">
+                <video muted playsinline preload="metadata" poster="/video/demo/panel.jpg" aria-label="Video demo: Panel del mentor">
+                  <source src="/video/demo/panel.mp4" type="video/mp4">
+                </video>
             </div>
-            <div class="hero-image-container">
-                <div class="hero-image-wrapper">
-                    <img src="assets/img/Inicial.jpg" alt="Isidro Huerta — Consultor en Liderazgo">
-                </div>
+            <figcaption class="sr">Panel del mentor: Al entrar, Isidro ve qui&#xE9;n necesita atenci&#xF3;n hoy: seguimientos vencidos, tareas por revisar, sesiones y renovaciones.</figcaption>
+          </figure>
+          <figure class="device desk " data-i="1" data-ui>
+ <div class="device-bar" aria-hidden="true"><i></i><i></i><i></i><span>cenit-comunicaciones.com</span></div>             <div class="screen">
+                <video muted playsinline preload="none" poster="/video/demo/alta.jpg" aria-label="Video demo: Alta de un mentorado">
+                  <source src="/video/demo/alta.mp4" type="video/mp4">
+                </video>
             </div>
-        </div>
-    </section>
-
-    <!-- ==================== ABOUT ==================== -->
-    <section class="section" id="sobre-mi">
-        <div class="section-inner">
-            <span class="section-tag">Sobre mí</span>
-            <h2 class="section-title">Más de dos décadas <em>transformando</em> líderes</h2>
-            <div class="about-grid">
-                <div class="about-image">
-                    <img src="assets/img/isidro.jpg.jpg" alt="Isidro Huerta">
-                </div>
-                <div class="about-text">
-                    <h3>Isidro Huerta</h3>
-                    <p>
-                        Durante más de 20 años he trabajado con ejecutivos, emprendedores y equipos 
-                        de alto rendimiento en México y Latinoamérica. Mi enfoque combina inteligencia 
-                        emocional, pensamiento estratégico y una profunda comprensión de la naturaleza humana.
-                    </p>
-                    <p>
-                        Como facilitador y consultor, he ayudado a cientos de profesionales a descubrir 
-                        su valor auténtico, superar el síndrome del impostor y comunicar su mensaje 
-                        con claridad y convicción.
-                    </p>
-                    <div class="about-quote">
-                        <p>"Si nosotros no creemos en nosotros, ¿por qué la gente tendría que confiar?"</p>
-                    </div>
-                </div>
+            <figcaption class="sr">Alta de un mentorado: Registrar a alguien toma un minuto: la plataforma genera su contrase&#xF1;a, te da el mensaje listo para enviarle y te lleva a asignar su primera tarea.</figcaption>
+          </figure>
+          <figure class="device desk " data-i="2" data-ui>
+ <div class="device-bar" aria-hidden="true"><i></i><i></i><i></i><span>cenit-comunicaciones.com</span></div>             <div class="screen">
+                <video muted playsinline preload="none" poster="/video/demo/embudo.jpg" aria-label="Video demo: CRM y seguimientos">
+                  <source src="/video/demo/embudo.mp4" type="video/mp4">
+                </video>
             </div>
-        </div>
-    </section>
-
-    <!-- ==================== BOOK ==================== -->
-    <section class="section section-alt" id="libro">
-        <div class="section-inner">
-            <span class="section-tag">Publicación</span>
-            <h2 class="section-title">Mi <em>libro</em></h2>
-            <p class="section-lead">Una obra que sienta las bases del crecimiento personal y el liderazgo auténtico.</p>
-            <div class="book-grid">
-                <div class="book-cover">
-                    <!-- REEMPLAZA ESTA RUTA POR LA PORTADA REAL DEL LIBRO -->
-                    <img src="assets/img/libroportada.jpg" alt="Portada del libro Cimientos para el Desarrollo Personal">
-                </div>
-                <div class="book-info">
-                    <h3>Cimientos para el Desarrollo Personal</h3>
-                    <p class="book-meta">
-                        Publicado en 2011 &middot; Editor: Octavio Colmenares y Vargas<br>
-                        Derechos Reservados © Isidro Huerta Pérez
-                    </p>
-                    <p>
-                        Una obra que sienta las bases para el crecimiento personal y profesional. 
-                        En sus páginas, Isidro comparte las herramientas y reflexiones que han 
-                        guiado a cientos de ejecutivos y líderes en su camino hacia una vida 
-                        más plena y un liderazgo más auténtico.
-                    </p>
-                    <p>
-                        Este libro es el reflejo de más de dos décadas de experiencia facilitando 
-                        procesos de transformación personal y organizacional.
-                    </p>
-                    <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 20px;">
-                        <a href="https://www.amazon.com.mx/Cimientos-para-Desarrollo-Personal-Ejecutivo-ebook/dp/B076YTGGG3" target="_blank" class="btn-primary">
-                            📱 Conseguir eBook en Amazon
-                        </a>
-                        <a href="#contacto" class="btn-outline-dark">
-                            Solicitar ejemplar físico
-                        </a>
-                    </div>
-                </div>
+            <figcaption class="sr">CRM y seguimientos: Cada cliente avanza de prospecto a activo arrastrando su tarjeta, y los seguimientos se ordenan solos: vencidos, hoy y esta semana.</figcaption>
+          </figure>
+          <figure class="device phone " data-i="3" data-ui>
+            <div class="screen">
+                <video muted playsinline preload="none" poster="/video/demo/mentorado.jpg" aria-label="Video demo: La app del mentorado">
+                  <source src="/video/demo/mentorado.mp4" type="video/mp4">
+                </video>
             </div>
+            <figcaption class="sr">La app del mentorado: El mentorado sabe qu&#xE9; sigue: su pr&#xF3;xima tarea, su avance y un chat directo con su mentor. Se instala en el celular como una app.</figcaption>
+          </figure>
+        <button class="play" type="button" id="demoPlay" aria-label="Pausar video"><span class="ic" aria-hidden="true"></span></button>
+      </div>
+      <div class="mobile-desc" id="mdesc" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTENIDO LIBRE (introducción al catálogo) ================= -->
+<section class="s navy" id="contenido-libre" aria-labelledby="t-libre">
+  <div class="wrap">
+    <div class="libre-head rv">
+      <div>
+        <h2 id="t-libre">Presentaciones gratuitas de Isidro.</h2>
+        <p class="lead">Las mismas ideas que trabaja en sus mentorías y talleres, en láminas que puedes ver, compartir y usar con tu equipo. Sin registro y sin costo.</p>
+      </div>
+      <a class="btn gold" href="/presentaciones/">Ver las 7 presentaciones</a>
+    </div>
+    <div class="decks">
+        <a class="deck rv feat" href="/presentaciones/los-colores/">
+          <div class="deck-cover" aria-hidden="true" data-ui><div class="lam lam-colorportada lam-propio   tono-noche" data-n="1">
+  <div class="lam-in">
+        <h3 class="lam-t"><span class="cp-a">La importancia del</span>
+          <span class="cp-color"><span style="color:#ffd21f">c</span><span style="color:#ef2b2b">o</span><span style="color:#2f8cff">l</span><span style="color:#a259ff">o</span><span style="color:#2f8cff">r</span></span></h3>
+        <span class="lam-cuadros" aria-hidden="true"><i></i><i></i><i></i></span>
+ <p class="lam-x">Por Isidro Huerta</p>       <div class="lam-pie"><img src="/img/cenit-logo-blanco.svg" alt="" width="601" height="240" loading="lazy"><span>1 / 18</span></div>
+  </div>
+</div>
+</div>
+          <div class="deck-in">
+            <h3>La importancia del color</h3>
+ <p class="deck-res">Colores primarios, secundarios y terciarios, por qu&#xE9; el color decide una compra y qu&#xE9; comunica cada color en tu imagen profesional: cu&#xE1;l usar en una entrevista, para hablar en p&#xFA;blico o para proyectar liderazgo.</p>             <p class="meta"><b class="deck-cat">Imagen</b> · 18 láminas · 11 min</p>
+          </div>
+        </a>
+        <a class="deck rv " href="/presentaciones/presentaciones-de-alto-impacto/">
+          <div class="deck-cover" aria-hidden="true" data-ui><div class="lam lam-portada    tono-navy" data-n="1">
+  <div class="lam-in">
+        <img class="lam-logo" src="/img/cenit-logo-oro.svg" alt="" width="601" height="240" loading="lazy">
+        <h3 class="lam-t">Presentaciones de alto impacto</h3>
+ <p class="lam-x">Apertura, mensaje, evidencia y cierre</p>         <p class="lam-autor">Isidro Huerta · Cenit Comunicaciones</p>
+        <svg class="lam-monte" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true"><path class="m1" d="M0 120V92l60-22 50 14 90-70 70 48 50-16 80 30v44z"/><path class="m2" d="M200 14l18 40-18-8-12 14-16-6z"/></svg>
+        <span class="lam-cenit" aria-hidden="true"></span>
+  </div>
+</div>
+</div>
+          <div class="deck-in">
+            <h3>Presentaciones de alto impacto</h3>
+            <p class="meta"><b class="deck-cat">Presentaciones</b> · 9 láminas · 6 min</p>
+          </div>
+        </a>
+        <a class="deck rv " href="/presentaciones/comunicacion-no-verbal/">
+          <div class="deck-cover" aria-hidden="true" data-ui><div class="lam lam-portada    tono-oro" data-n="1">
+  <div class="lam-in">
+        <img class="lam-logo" src="/img/cenit-logo-navy.svg" alt="" width="601" height="240" loading="lazy">
+        <h3 class="lam-t">Lo que comunicas antes de hablar</h3>
+ <p class="lam-x">Comunicaci&#xF3;n no verbal para l&#xED;deres</p>         <p class="lam-autor">Isidro Huerta · Cenit Comunicaciones</p>
+        <svg class="lam-monte" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true"><path class="m1" d="M0 120V92l60-22 50 14 90-70 70 48 50-16 80 30v44z"/><path class="m2" d="M200 14l18 40-18-8-12 14-16-6z"/></svg>
+        <span class="lam-cenit" aria-hidden="true"></span>
+  </div>
+</div>
+</div>
+          <div class="deck-in">
+            <h3>Lo que comunicas antes de hablar</h3>
+            <p class="meta"><b class="deck-cat">Imagen</b> · 8 láminas · 5 min</p>
+          </div>
+        </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REDES ================= -->
+<section class="s tone" id="redes" aria-labelledby="t-redes">
+  <div class="wrap">
+    <div class="redes-head rv">
+      <h2 id="t-redes">Contenido libre para tu crecimiento,</h2>
+      <p class="redes-eslogan">al alcance de tu mano.</p>
+      <p class="lead">Ideas, ejercicios y fragmentos de conferencias que Isidro comparte cada semana. Síguelo donde ya estás.</p>
+    </div>
+    <div class="redes ">
+      <div class="redes-l">
+      <ul class="red-lista rv">
+          <li><a class="red yt" href="https://www.youtube.com/user/CenitComunicaciones" target="_blank" rel="noopener"><span class="red-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></svg></span><span class="red-tx"><b>YouTube</b><span>CenitComunicaciones · conferencias y cápsulas</span></span><span class="red-go">Ver canal</span></a></li>
+          <li><a class="red in" href="https://www.linkedin.com/profile/view?id=130284099" target="_blank" rel="noopener"><span class="red-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M7.5 10v6.5M7.5 7.3v.2M11 16.5V10m0 3c0-2 1.2-3 2.6-3s2.4 1 2.4 3v3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span class="red-tx"><b>LinkedIn</b><span>Isidro Huerta · artículos de liderazgo</span></span><span class="red-go">Conectar</span></a></li>
+          <li><a class="red x" href="https://twitter.com/Isidrohuerta" target="_blank" rel="noopener"><span class="red-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span class="red-tx"><b>X</b><span>@Isidrohuerta · ideas breves</span></span><span class="red-go">Seguir</span></a></li>
+      </ul>
+      <a class="ig-vacio rv" href="/presentaciones/">
+        <blockquote class="ig-frase">“La presencia ejecutiva no se improvisa; se desarrolla.”</blockquote>
+        <span class="ig-firma">Isidro Huerta</span>
+        <span class="ig-cta">Empieza por las presentaciones gratuitas →</span>
+      </a>
+      </div>
+      <div class="redes-tel rv">
+        <figure class="tel" data-ui>
+  <div class="historia" id="historia" tabindex="0" role="region" aria-roledescription="historia" aria-label="Historia de Isidro: La importancia del color. Toca a la derecha para avanzar.">
+    <div class="h-barras" aria-hidden="true"> <span><i></i></span>  <span><i></i></span>  <span><i></i></span>  <span><i></i></span>  <span><i></i></span>  <span><i></i></span>  <span><i></i></span>  <span><i></i></span>  <span><i></i></span>  <span><i></i></span> </div>
+    <div class="h-cab">
+      <span class="h-av"> <img src="/img/equipo/isidro-huerta.jpg" alt="" width="64" height="64" loading="lazy"> </span>
+      <span class="h-quien"><b>Isidro Huerta</b><span>La importancia del color</span></span>
+      <button type="button" class="h-pausa" id="hPausa" aria-label="Pausar historia"><i></i></button>
+    </div>
+    <div class="h-cuadros">
+        <div class="h-cuadro on" aria-hidden="false" data-claro=""><div class="lam lam-colorportada lam-propio  vert tono-noche" data-n="1">
+  <div class="lam-in">
+        <h3 class="lam-t"><span class="cp-a">La importancia del</span>
+          <span class="cp-color"><span style="color:#ffd21f">c</span><span style="color:#ef2b2b">o</span><span style="color:#2f8cff">l</span><span style="color:#a259ff">o</span><span style="color:#2f8cff">r</span></span></h3>
+        <span class="lam-cuadros" aria-hidden="true"><i></i><i></i><i></i></span>
+ <p class="lam-x">Por Isidro Huerta</p>       <div class="lam-pie"><img src="/img/cenit-logo-blanco.svg" alt="" width="601" height="240" loading="lazy"><span>1 / 18</span></div>
+  </div>
+</div>
+</div>
+        <div class="h-cuadro " aria-hidden="true" data-claro=""><div class="lam lam-muestras lam-propio  vert tono-noche" data-n="2">
+  <div class="lam-in">
+        <span class="lam-cuadros" aria-hidden="true"><i></i><i></i><i></i></span>
+        <div class="lam-der">
+          <h3 class="lam-t">Colores primarios</h3>
+          <ul class="lam-nombres "> <li style="color:#ef2b2b">Rojo</li>  <li style="color:#ffd21f">Amarillo</li>  <li style="color:#2f8cff">Azul</li> </ul>
         </div>
-    </section>
-
-    <!-- ==================== SERVICES ==================== -->
-    <section class="section" id="servicios">
-        <div class="section-inner">
-            <span class="section-tag">Servicios</span>
-            <h2 class="section-title">Cómo puedo <em>ayudarte</em></h2>
-            <p class="section-lead">Soluciones personalizadas para cada etapa de tu desarrollo profesional y el de tu organización.</p>
-
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🎯</div>
-                    <h3>Consultoría Ejecutiva 1:1</h3>
-                    <p>
-                        Sesiones personalizadas para líderes que buscan claridad, 
-                        confianza y una estrategia para comunicar su valor. Trabajamos 
-                        juntos para que te "compres" antes de venderte.
-                    </p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🎤</div>
-                    <h3>Conferencias y Keynotes</h3>
-                    <p>
-                        Presentaciones de alto impacto sobre liderazgo, inteligencia 
-                        emocional, síndrome del impostor y el poder del autoconocimiento. 
-                        Para eventos corporativos, congresos y universidades.
-                    </p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">👥</div>
-                    <h3>Capacitación In-Company</h3>
-                    <p>
-                        Programas diseñados a la medida de tu empresa. Desarrollo de 
-                        habilidades de liderazgo, comunicación efectiva y trabajo en 
-                        equipo para todos los niveles organizacionales.
-                    </p>
-                </div>
-            </div>
+ <p class="lam-nota">No pueden obtenerse por una mezcla, y son la base de todos los colores.</p>       <div class="lam-pie"><img src="/img/cenit-logo-blanco.svg" alt="" width="601" height="240" loading="lazy"><span>2 / 18</span></div>
+  </div>
+</div>
+</div>
+        <div class="h-cuadro " aria-hidden="true" data-claro=""><div class="lam lam-porcentajes lam-propio  vert tono-noche" data-n="5">
+  <div class="lam-in">
+        <h3 class="sr">El color decide</h3>
+        <dl class="lam-pct">
+ <div><dt style="color:#2fa8ff">85 %</dt><dd>de los consumidores sienten que el principal factor de decisi&#xF3;n es el color</dd></div>  <div><dt style="color:#34c759">80 %</dt><dd>m&#xE1;s reconocimiento de marca gracias al color</dd></div>         </dl>
+      <div class="lam-pie"><img src="/img/cenit-logo-blanco.svg" alt="" width="601" height="240" loading="lazy"><span>5 / 18</span></div>
+  </div>
+</div>
+</div>
+        <div class="h-cuadro " aria-hidden="true" data-claro=""><div class="lam lam-segundos lam-propio  vert tono-noche" data-n="6">
+  <div class="lam-in">
+        <svg class="lam-reloj" viewBox="0 0 120 140" aria-hidden="true"><rect x="52" y="2" width="16" height="12" rx="3" fill="#c9cdd6"/><circle cx="60" cy="78" r="54" fill="none" stroke="#c9cdd6" stroke-width="6"/><circle cx="60" cy="78" r="44" fill="#f4f5f7"/><path d="M60 78V44" stroke="#0a0a0a" stroke-width="5" stroke-linecap="round"/><path d="M60 78l22 12" stroke="#2f8cff" stroke-width="5" stroke-linecap="round"/><circle cx="60" cy="78" r="5" fill="#0a0a0a"/></svg>
+        <div class="lam-der">
+          <p class="lam-dato">62&#x2013;90 s</p>
+ <p class="lam-x">Es lo que tarda una persona en hacer un juicio subconsciente sobre una persona, producto o servicio basado &#xFA;nicamente en el color.</p>         </div>
+      <div class="lam-pie"><img src="/img/cenit-logo-blanco.svg" alt="" width="601" height="240" loading="lazy"><span>6 / 18</span></div>
+  </div>
+</div>
+</div>
+        <div class="h-cuadro " aria-hidden="true" data-claro=""><div class="lam lam-color lam-propio  vert tono-noche" data-n="7" style="--lf:#0a0a0a;--lt:#ffffff">
+  <div class="lam-in">
+        <div class="lam-der">
+          <h3 class="lam-t">Negro</h3>
+          <ul class="lam-rasgos"> <li>Elegancia</li>  <li>Glamour</li>  <li>Liderazgo</li>  <li>Sofisticaci&#xF3;n</li>  <li>Poder</li>  <li>Muerte</li> </ul>
+ <p class="lam-nota">No se recomienda para entrevistas de trabajo</p>         </div>
+      <div class="lam-pie"><img src="/img/cenit-logo-blanco.svg" alt="" width="601" height="240" loading="lazy"><span>7 / 18</span></div>
+  </div>
+</div>
+</div>
+        <div class="h-cuadro " aria-hidden="true" data-claro=""><div class="lam lam-color lam-propio  vert tono-noche" data-n="8" style="--lf:#0b1446;--lt:#ffffff">
+  <div class="lam-in">
+        <div class="lam-der">
+          <h3 class="lam-t">Azul marino</h3>
+          <ul class="lam-rasgos"> <li>Confiabilidad</li>  <li>Seguridad</li>  <li>Responsabilidad</li>  <li>Integridad</li> </ul>
+ <p class="lam-nota">Se recomienda para entrevistas de trabajo y para hablar en p&#xFA;blico</p>         </div>
+      <div class="lam-pie"><img src="/img/cenit-logo-blanco.svg" alt="" width="601" height="240" loading="lazy"><span>8 / 18</span></div>
+  </div>
+</div>
+</div>
+        <div class="h-cuadro " aria-hidden="true" data-claro=""><div class="lam lam-color lam-propio  vert tono-noche" data-n="13" style="--lf:#e3191c;--lt:#ffffff">
+  <div class="lam-in">
+        <div class="lam-der">
+          <h3 class="lam-t">Rojo</h3>
+          <ul class="lam-rasgos"> <li>Energ&#xED;a</li>  <li>Pasi&#xF3;n</li>  <li>Excitante</li>  <li>Llama la atenci&#xF3;n</li> </ul>
         </div>
-    </section>
-
-    <!-- ==================== QUOTE ==================== -->
-    <section class="quote-section">
-        <div class="quote-inner">
-            <blockquote>
-                Antes de vender, cómprate. Se necesita un verdadero ejercicio de 
-                introspección para dimensionar nuestro valor, nuestras competencias 
-                y nuestra experiencia.
-            </blockquote>
-            <p class="quote-author">— Isidro Huerta</p>
+      <div class="lam-pie"><img src="/img/cenit-logo-blanco.svg" alt="" width="601" height="240" loading="lazy"><span>13 / 18</span></div>
+  </div>
+</div>
+</div>
+        <div class="h-cuadro " aria-hidden="true" data-claro="1"><div class="lam lam-color lam-propio  vert tono-noche" data-n="14" style="--lf:#ffffff;--lt:#5b2a91">
+  <div class="lam-in">
+        <div class="lam-der">
+          <h3 class="lam-t">Blanco</h3>
+          <ul class="lam-rasgos"> <li>Refinamiento</li>  <li>Pureza</li>  <li>Luz</li>  <li>Simplicidad</li>  <li>Bondad</li> </ul>
         </div>
-    </section>
-
-    <!-- ==================== BLOG PREVIEW ==================== -->
-    <section class="section" id="blog">
-        <div class="section-inner">
-            <span class="section-tag">Reflexiones</span>
-            <h2 class="section-title">Lo último del <em>blog</em></h2>
-            <p class="section-lead">Ideas, reflexiones y herramientas para tu crecimiento personal y profesional.</p>
-
-            <div class="blog-grid">
-                <div class="blog-card">
-                    <div class="blog-card-content">
-                        <span class="blog-card-date">Artículo destacado</span>
-                        <h3>¿Te vendes o te Dejas Comprar?</h3>
-                        <p>
-                            La verdadera pregunta cuando se trata de una entrevista de trabajo 
-                            o de realizar una venta, ya sea de un producto, servicio o de una idea.
-                        </p>
-                        <a href="https://www.isidrohuerta.com" target="_blank">Leer más →</a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <div class="blog-card-content">
-                        <span class="blog-card-date">Próximamente</span>
-                        <h3>El Síndrome del Impostor en el Liderazgo</h3>
-                        <p>
-                            Afecta principalmente a personas exitosas y competitivas. 
-                            ¿Cómo identificarlo y superarlo?
-                        </p>
-                        <a href="#blog">Próximamente →</a>
-                    </div>
-                </div>
-                <div class="blog-card">
-                    <div class="blog-card-content">
-                        <span class="blog-card-date">Próximamente</span>
-                        <h3>La Pausa como Estrategia de Liderazgo</h3>
-                        <p>
-                            Encontremos pausas en nuestro día a día para generar mejores 
-                            pensamientos y tomar mejores decisiones.
-                        </p>
-                        <a href="#blog">Próximamente →</a>
-                    </div>
-                </div>
-            </div>
+      <div class="lam-pie"><img src="/img/cenit-logo-navy.svg" alt="" width="601" height="240" loading="lazy"><span>14 / 18</span></div>
+  </div>
+</div>
+</div>
+        <div class="h-cuadro " aria-hidden="true" data-claro="1"><div class="lam lam-color lam-propio  vert tono-noche" data-n="16" style="--lf:#8cc63f;--lt:#12300a">
+  <div class="lam-in">
+        <div class="lam-der">
+          <h3 class="lam-t">Verde</h3>
+          <ul class="lam-rasgos"> <li>Vida</li>  <li>Crecimiento</li>  <li>Naturaleza</li>  <li>Frescura</li> </ul>
         </div>
-    </section>
+      <div class="lam-pie"><img src="/img/cenit-logo-navy.svg" alt="" width="601" height="240" loading="lazy"><span>16 / 18</span></div>
+  </div>
+</div>
+</div>
+        <div class="h-cuadro " aria-hidden="true" data-claro=""><div class="lam lam-colorportada lam-propio  vert tono-noche" data-n="18">
+  <div class="lam-in">
+        <h3 class="lam-t"><span class="cp-a">La importancia del</span>
+          <span class="cp-color"><span style="color:#ffd21f">c</span><span style="color:#ef2b2b">o</span><span style="color:#2f8cff">l</span><span style="color:#a259ff">o</span><span style="color:#2f8cff">r</span></span></h3>
+        <span class="lam-cuadros" aria-hidden="true"><i></i><i></i><i></i></span>
+ <p class="lam-x">Por Isidro Huerta</p>       <div class="lam-pie"><img src="/img/cenit-logo-blanco.svg" alt="" width="601" height="240" loading="lazy"><span>18 / 18</span></div>
+  </div>
+</div>
+</div>
+    </div>
+    <button type="button" class="h-zona h-ant" id="hAnt" aria-label="Anterior"></button>
+    <button type="button" class="h-zona h-sig" id="hSig" aria-label="Siguiente"></button>
+    <a class="h-cta" href="/presentaciones/los-colores/">Ver la presentación completa <span aria-hidden="true">↑</span></a>
+  </div>
+  <figcaption class="sr">Historia en formato vertical con 10 láminas de la presentación “La importancia del color”.</figcaption>
+</figure>
 
-    <!-- ==================== CONTACT ==================== -->
-    <section class="section section-alt" id="contacto">
-        <div class="section-inner">
-            <span class="section-tag">Contacto</span>
-            <h2 class="section-title">Hablemos de <em>tu proyecto</em></h2>
-            <p class="section-lead">Estoy listo para ayudarte. Escríbeme y conversemos sobre tus objetivos.</p>
+        <p class="tel-nota">Así se ve una historia de Isidro: <b>La importancia del color</b>, en formato para el celular.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h3>Información de contacto</h3>
-                    <p>
-                        Ya sea que necesites una consultoría personalizada, una conferencia 
-                        para tu empresa o un programa de capacitación, estaré encantado de escucharte.
-                    </p>
-                    <div class="contact-method">
-                        📧 <a href="mailto:isidro@isidrohuerta.com">isidro@isidrohuerta.com</a>
-                    </div>
-                    <div class="contact-method">
-                        📍 Puebla, México
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form action="#" method="POST">
-                        <input type="text" name="nombre" placeholder="Tu nombre" required>
-                        <input type="email" name="email" placeholder="Tu correo electrónico" required>
-                        <textarea name="mensaje" rows="4" placeholder="Cuéntame sobre tu proyecto o interés..." required></textarea>
-                        <button type="submit">Enviar mensaje</button>
-                    </form>
-                </div>
-            </div>
+<!-- ================= LO QUE TRABAJAMOS: encabezado fijo + temas en filas grandes ================= -->
+<section class="s" id="temas" aria-labelledby="t-pilares">
+  <div class="wrap temas">
+    <div class="temas-head rv">
+      <h2 id="t-pilares">Habilidades que dan resultados.</h2>
+      <p class="lead">Los temas en los que Isidro se ha especializado durante más de 20 años como facilitador. Cada mentoría, curso y taller parte de uno o varios de ellos.</p>
+      <a class="more" href="/presentaciones/">Míralos en las presentaciones gratuitas</a>
+    </div>
+    <ol class="temas-lista">
+      <li class="rv"><b>Presentaciones de alto impacto</b><p>Apertura, mensaje, evidencia y cierre; hablar en público sin miedo.</p></li>
+      <li class="rv"><b>Imagen y comunicación no verbal</b><p>Postura, voz, mirada, color y congruencia: lo que comunicas antes de hablar.</p></li>
+      <li class="rv"><b>Liderazgo e inteligencia emocional</b><p>Escuchar antes de responder y conversaciones difíciles con retroalimentación.</p></li>
+      <li class="rv"><b>Ventas consultivas y negociación</b><p>Vender no es presionar: es escuchar, entender y comunicar valor.</p></li>
+      <li class="rv"><b>Marca personal y storytelling</b><p>Lo que proyectas de forma constante y las historias que hacen memorable tu mensaje.</p></li>
+      <li class="rv"><b>Servicio y trabajo en equipo</b><p>Servicio extraordinario con enfoque humano y equipos que sí colaboran.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= FORMAS DE TRABAJAR (sin precios: se conversan) ================= -->
+<section class="s tone" id="formas" aria-labelledby="t-formas">
+  <div class="wrap">
+    <div class="head rv">
+      <h2 id="t-formas">Cuatro formas de trabajar con Cenit.</h2>
+      <p class="lead">Desde una sesión para resolver algo concreto hasta un proceso de meses con Isidro. Cada caso es distinto: lo platicamos y te propongo lo que de verdad te sirve.</p>
+    </div>
+    <div class="offer">
+      <article class="offer-main rv">
+        <h3>Mentoría ejecutiva 1:1 con Isidro</h3>
+        <p>Para dirección, gerencia y C-Suite, y para profesionales en transición de carrera. Un proceso de 3 a 6 meses en el que Isidro trabaja contigo cada semana y da seguimiento a tus tareas y tu avance desde la plataforma.</p>
+        <ul class="ticks">
+          <li>Diagnóstico de comunicación y presencia ejecutiva</li>
+          <li>Plan de mejora personal, con metas por escrito</li>
+          <li>Preparación para juntas, entrevistas y presentaciones</li>
+          <li>Sesiones 1:1 en línea o presenciales, y chat con Isidro</li>
+        </ul>
+        <a class="btn gold" href="#contacto" data-interes="Mentoría ejecutiva 1:1 con Isidro">Conversemos</a>
+      </article>
+      <div class="offer-side">
+        <article class="offer-item rv">
+          <h3>Mini mentoría</h3>
+          <p>Una sesión de 60 a 90 minutos para resolver algo concreto: una presentación, una negociación, una conversación difícil.</p>
+          <a class="more" href="#resolver">Elige tu tema</a>
+        </article>
+        <article class="offer-item rv">
+          <h3>Cursos en línea</h3>
+          <p>Videos, lecturas y prácticas a tu ritmo, con el avance guardado en la plataforma.</p>
+          <a class="more" href="#cursos">Ver los cursos</a>
+        </article>
+        <article class="offer-item rv">
+          <h3>Empresas y conferencias</h3>
+          <p>Consultoría, talleres de 4, 8 o 16 horas, programas de liderazgo y conferencias magistrales.</p>
+          <a class="more" href="#empresas">Ver opciones para equipos</a>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MINI MENTORÍAS: ELIGE TU TEMA ================= -->
+<section class="s" id="resolver" aria-labelledby="t-resolver">
+  <div class="wrap">
+    <div class="head rv">
+      <h2 id="t-resolver">¿Qué necesitas resolver esta semana?</h2>
+      <p class="lead">Elige el tema y te cuento cómo lo trabajaríamos. Una mini mentoría es una sola sesión: llegas con tu caso y sales con un plan.</p>
+    </div>
+    <div class="picker rv">
+      <fieldset class="topics">
+        <legend class="sr">Tema de la mini mentoría</legend>
+        <label><input type="radio" name="tema" value="presentacion" checked><span>Una presentación de alto impacto</span></label>
+        <label><input type="radio" name="tema" value="entrevista"><span>Una entrevista o un cambio de carrera</span></label>
+        <label><input type="radio" name="tema" value="negociar"><span>Negociar o cerrar una venta</span></label>
+        <label><input type="radio" name="tema" value="equipo"><span>Una conversación difícil con mi equipo</span></label>
+        <label><input type="radio" name="tema" value="imagen"><span>Mi imagen y marca personal</span></label>
+        <label><input type="radio" name="tema" value="nervios"><span>Hablar en público sin nervios</span></label>
+      </fieldset>
+
+      <div class="answers">
+        <article class="answer" data-tema="presentacion">
+          <h3>Ensayo de presentación</h3>
+          <p>Traes tu presentación tal como la darías. La ensayamos dos veces y ajustamos la estructura (apertura, mensaje, evidencia y cierre), la voz y lo que hacen tus manos.</p>
+          <dl class="spec"><div><dt>Con</dt><dd>Isidro o un mentor Cenit</dd></div><div><dt>Duración</dt><dd>90 min</dd></div><div><dt>Modalidad</dt><dd>En línea o presencial</dd></div></dl>
+          <p class="alt-line">¿La presentas ante el consejo o en un evento? Podemos hacerla directamente con Isidro.</p>
+          <a class="btn primary" href="#contacto" data-interes="Mini mentoría" data-mensaje="Mini mentoría: Ensayo de presentación (90 min).">Platiquemos tu presentación</a>
+        </article>
+        <article class="answer" data-tema="entrevista">
+          <h3>Preparación para entrevista o transición</h3>
+          <p>Isidro acompaña a ejecutivos en transición de carrera; fue consultor de Lee Hecht Harrison de 2012 a 2022. Preparamos tu historia profesional, las preguntas difíciles y cómo te presentas en los primeros dos minutos.</p>
+          <dl class="spec"><div><dt>Con</dt><dd>Isidro Huerta</dd></div><div><dt>Duración</dt><dd>60 min</dd></div><div><dt>Modalidad</dt><dd>En línea o presencial</dd></div></dl>
+          <p class="alt-line">Si después decides hacer la mentoría 1:1, esta sesión cuenta como parte de ella.</p>
+          <a class="btn primary" href="#contacto" data-interes="Mini mentoría" data-mensaje="Mini mentoría con Isidro: Entrevista o transición de carrera (60 min).">Escríbele a Isidro</a>
+        </article>
+        <article class="answer" data-tema="negociar">
+          <h3>Ensayo de negociación</h3>
+          <p>Simulamos la reunión con tus objeciones reales: precio, plazos, competencia. Practicas cómo comunicar valor y responder sin ceder de más.</p>
+          <dl class="spec"><div><dt>Con</dt><dd>Isidro o un mentor Cenit</dd></div><div><dt>Duración</dt><dd>60 min</dd></div><div><dt>Modalidad</dt><dd>En línea o presencial</dd></div></dl>
+          <p class="alt-line">Para todo tu equipo comercial: el taller de ventas consultivas.</p>
+          <a class="btn primary" href="#contacto" data-interes="Mini mentoría" data-mensaje="Mini mentoría: Ensayo de negociación (60 min).">Platiquemos tu negociación</a>
+        </article>
+        <article class="answer" data-tema="equipo">
+          <h3>La conversación que estás posponiendo</h3>
+          <p>Retroalimentación, un desacuerdo, un cambio que hay que anunciar. Preparamos qué decir, cómo escuchar y cómo cerrar con un acuerdo.</p>
+          <dl class="spec"><div><dt>Con</dt><dd>Isidro o un mentor Cenit</dd></div><div><dt>Duración</dt><dd>60 min</dd></div><div><dt>Modalidad</dt><dd>En línea o presencial</dd></div></dl>
+          <p class="alt-line">Si el reto es de todo el equipo, conviene un taller de trabajo en equipo.</p>
+          <a class="btn primary" href="#contacto" data-interes="Mini mentoría" data-mensaje="Mini mentoría: Conversación difícil con mi equipo (60 min).">Platiquemos tu caso</a>
+        </article>
+        <article class="answer" data-tema="imagen">
+          <h3>Diagnóstico de imagen y presencia</h3>
+          <p>Revisamos cómo te ven antes de que hables: postura, voz, mirada, vestimenta y tu perfil profesional en línea. Sales con tres cambios concretos.</p>
+          <dl class="spec"><div><dt>Con</dt><dd>Isidro o un mentor Cenit</dd></div><div><dt>Duración</dt><dd>60 min</dd></div><div><dt>Modalidad</dt><dd>En línea o presencial</dd></div></dl>
+          <p class="alt-line">La presencia ejecutiva no se improvisa; se desarrolla.</p>
+          <a class="btn primary" href="#contacto" data-interes="Mini mentoría" data-mensaje="Mini mentoría: Diagnóstico de imagen y presencia (60 min).">Platiquemos tu caso</a>
+        </article>
+        <article class="answer" data-tema="nervios">
+          <h3>Voz y control antes de salir</h3>
+          <p>Isidro es locutor certificado y su voz ha estado en videos corporativos de marcas internacionales. Te enseña la rutina de respiración y voz que usa antes de hablar ante cientos de personas.</p>
+          <dl class="spec"><div><dt>Con</dt><dd>Isidro Huerta</dd></div><div><dt>Duración</dt><dd>60 min</dd></div><div><dt>Modalidad</dt><dd>En línea o presencial</dd></div></dl>
+          <p class="alt-line">Incluye el audio de visualización guiada para practicar en casa.</p>
+          <a class="btn primary" href="#contacto" data-interes="Mini mentoría" data-mensaje="Mini mentoría con Isidro: Hablar en público sin nervios (60 min).">Escríbele a Isidro</a>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CURSOS ================= -->
+<section class="s tone" id="cursos" aria-labelledby="t-cursos">
+  <div class="wrap">
+    <div class="head rv">
+      <h2 id="t-cursos">Cursos para practicar a tu ritmo.</h2>
+      <p class="lead">Diseñados y grabados por Isidro, con ejercicios y avance guardado en la plataforma. Puedes sumar una mini mentoría a cualquier curso para revisar tu práctica.</p>
+    </div>
+    <div class="courses mosaico">
+        <article class="course rv feat">
+          <div class="cover c-navy" aria-hidden="true">
+            <svg class="cover-cenit" viewBox="0 0 200 120" preserveAspectRatio="xMidYMax meet"><circle class="st" cx="100" cy="16" r="5"/><circle class="halo" cx="100" cy="16" r="13"/><path class="m-lejos" d="M0 120V92l34-14 26 8 22-12 18 6 22-10 30 14 22-6 26 10v32z"/><path class="m-cima" d="M28 120l72-78 72 78z"/><path class="m-luz" d="M100 42l72 78h-62z"/><path class="m-nieve" d="M100 42l13 14-7 2-6-4-7 5-6-3z"/></svg>
+            <span class="cover-e">Online &amp; Offline</span>
+          </div>
+          <div class="course-in">
+            <h3>Tu Mejor Versi&#xF3;n Online &amp; Offline</h3>
+            <p>El seminario de Isidro en seis m&#xF3;dulos: la voz, la imagen y el mensaje para comunicar en persona y a distancia.</p>
+            <p class="meta">6 m&#xF3;dulos &#xB7; 4 h 20 min · con Isidro Huerta</p>
+            <a class="more" href="#contacto" data-interes="Curso en línea" data-mensaje="Me interesa el curso: Tu Mejor Versi&#xF3;n Online &amp; Offline.">Pide información</a>
+          </div>
+        </article>
+        <article class="course rv ">
+          <div class="cover c-gold" aria-hidden="true">
+            <svg class="cover-cenit" viewBox="0 0 200 120" preserveAspectRatio="xMidYMax meet"><circle class="st" cx="100" cy="16" r="5"/><circle class="halo" cx="100" cy="16" r="13"/><path class="m-lejos" d="M0 120V92l34-14 26 8 22-12 18 6 22-10 30 14 22-6 26 10v32z"/><path class="m-cima" d="M28 120l72-78 72 78z"/><path class="m-luz" d="M100 42l72 78h-62z"/><path class="m-nieve" d="M100 42l13 14-7 2-6-4-7 5-6-3z"/></svg>
+            <span class="cover-e">Libro y curso</span>
+          </div>
+          <div class="course-in">
+            <h3>Cimientos para el desarrollo personal</h3>
+            <p>Su libro, una gu&#xED;a para el ejecutivo, convertido en curso: autoconocimiento, actitud y h&#xE1;bitos.</p>
+            <p class="meta">5 materiales &#xB7; 2 h · con Isidro Huerta</p>
+            <a class="more" href="#contacto" data-interes="Curso en línea" data-mensaje="Me interesa el curso: Cimientos para el desarrollo personal.">Pide información</a>
+          </div>
+        </article>
+        <article class="course rv ">
+          <div class="cover c-paper" aria-hidden="true">
+            <svg class="cover-cenit" viewBox="0 0 200 120" preserveAspectRatio="xMidYMax meet"><circle class="st" cx="100" cy="16" r="5"/><circle class="halo" cx="100" cy="16" r="13"/><path class="m-lejos" d="M0 120V92l34-14 26 8 22-12 18 6 22-10 30 14 22-6 26 10v32z"/><path class="m-cima" d="M28 120l72-78 72 78z"/><path class="m-luz" d="M100 42l72 78h-62z"/><path class="m-nieve" d="M100 42l13 14-7 2-6-4-7 5-6-3z"/></svg>
+            <span class="cover-e">Hablar en p&#xFA;blico</span>
+          </div>
+          <div class="course-in">
+            <h3>Hablar en p&#xFA;blico sin miedo</h3>
+            <p>Una idea central, respiraci&#xF3;n antes de empezar y la mirada en tu audiencia.</p>
+            <p class="meta">5 lecciones &#xB7; 1 h 20 min · con Isidro Huerta</p>
+            <a class="more" href="#contacto" data-interes="Curso en línea" data-mensaje="Me interesa el curso: Hablar en p&#xFA;blico sin miedo.">Pide información</a>
+          </div>
+        </article>
+        <article class="course rv ">
+          <div class="cover c-soft" aria-hidden="true">
+            <svg class="cover-cenit" viewBox="0 0 200 120" preserveAspectRatio="xMidYMax meet"><circle class="st" cx="100" cy="16" r="5"/><circle class="halo" cx="100" cy="16" r="13"/><path class="m-lejos" d="M0 120V92l34-14 26 8 22-12 18 6 22-10 30 14 22-6 26 10v32z"/><path class="m-cima" d="M28 120l72-78 72 78z"/><path class="m-luz" d="M100 42l72 78h-62z"/><path class="m-nieve" d="M100 42l13 14-7 2-6-4-7 5-6-3z"/></svg>
+            <span class="cover-e">Storytelling</span>
+          </div>
+          <div class="course-in">
+            <h3>Storytelling para l&#xED;deres y vendedores</h3>
+            <p>C&#xF3;mo una buena historia hace memorable un mensaje, una propuesta o una presentaci&#xF3;n.</p>
+            <p class="meta">4 lecciones &#xB7; 1 h 10 min · con Isidro Huerta</p>
+            <a class="more" href="#contacto" data-interes="Curso en línea" data-mensaje="Me interesa el curso: Storytelling para l&#xED;deres y vendedores.">Pide información</a>
+          </div>
+        </article>
+        <article class="course rv ">
+          <div class="cover c-deep" aria-hidden="true">
+            <svg class="cover-cenit" viewBox="0 0 200 120" preserveAspectRatio="xMidYMax meet"><circle class="st" cx="100" cy="16" r="5"/><circle class="halo" cx="100" cy="16" r="13"/><path class="m-lejos" d="M0 120V92l34-14 26 8 22-12 18 6 22-10 30 14 22-6 26 10v32z"/><path class="m-cima" d="M28 120l72-78 72 78z"/><path class="m-luz" d="M100 42l72 78h-62z"/><path class="m-nieve" d="M100 42l13 14-7 2-6-4-7 5-6-3z"/></svg>
+            <span class="cover-e">Imagen ejecutiva</span>
+          </div>
+          <div class="course-in">
+            <h3>Imagen profesional y marca personal</h3>
+            <p>Tu imagen comunica antes que tus palabras: postura, voz, mirada y congruencia.</p>
+            <p class="meta">5 lecciones &#xB7; 1 h 30 min · con Isidro Huerta</p>
+            <a class="more" href="#contacto" data-interes="Curso en línea" data-mensaje="Me interesa el curso: Imagen profesional y marca personal.">Pide información</a>
+          </div>
+        </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ISIDRO ================= -->
+<section class="s" id="isidro" aria-labelledby="t-isidro">
+  <div class="wrap split">
+    <div class="bio rv">
+      <h2 id="t-isidro">Isidro Huerta, fundador y CEO de Cenit.</h2>
+      <p class="lead">Consultor corporativo, conferenciante, mentor y locutor profesional, con más de 20 años en desarrollo humano y comunicación y más de 30 en la aviación comercial internacional, donde fue gerente de ventas en Korean Air y South African Airways.</p>
+      <p class="lead">Es mentor de C-Suite, dirección y gerencia, y de equipos operativos. Hoy dirige a los mentores de Cenit, diseña cada curso y lleva personalmente los procesos de mentoría ejecutiva.</p>
+      <dl class="facts">
+        <div><dt>Libro (2011)</dt><dd>Cimientos para el Desarrollo Personal. Una guía para el Ejecutivo</dd></div>
+        <div><dt>Certificaciones</dt><dd>Capacitador externo STPS · Locutor SEP</dd></div>
+        <div><dt>Su voz en</dt><dd>Delta Air Lines, SkyTeam, Coca-Cola, Larousse, MSD y Sanofi</dd></div>
+        <div><dt>Idiomas</dt><dd>Español, inglés y francés</dd></div>
+      </dl>
+      <div class="row-btns"><a class="btn primary" href="#contacto" data-interes="Mentoría ejecutiva 1:1 con Isidro">Escríbele a Isidro</a><a class="btn ghost" href="#empresas">Invítalo a tu evento</a></div>
+    </div>
+    <figure class="portrait rv">
+        <img src="/img/equipo/isidro-huerta.jpg" alt="Isidro Huerta, fundador y CEO de Cenit Comunicaciones" width="1200" height="1500" loading="lazy" decoding="async">
+      <figcaption><b>Isidro Huerta</b><span>Fundador y CEO · Cenit Comunicaciones</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= FRASE ================= -->
+<section class="quote-band" aria-label="Frase de Isidro Huerta">
+  <div class="wrap">
+    <blockquote class="rv"><span class="cenit-marca" aria-hidden="true"></span><p>La presencia ejecutiva no se improvisa; se desarrolla.</p><cite>Isidro Huerta</cite></blockquote>
+  </div>
+</section>
+
+<!-- ================= EQUIPO ================= -->
+<section class="s tone" id="mentores" aria-labelledby="t-ment">
+  <div class="wrap">
+    <div class="head rv">
+      <h2 id="t-ment">Un equipo formado con el método de Isidro.</h2>
+      <p class="lead">Cada mentor se especializa en un tipo de conversación. Isidro los forma, revisa sus procesos y está presente en los casos que lo necesitan.</p>
+    </div>
+    <div class="team">
+        <article class="member rv">
+          <div class="ph"> <img src="/img/equipo/mentor-1.jpg" alt="Nombre por confirmar, Mentor Cenit &#xB7; especialidad por confirmar" width="960" height="1200" loading="lazy" decoding="async"> </div>
+          <div class="in"><h3>Nombre por confirmar</h3><p class="role">Mentor Cenit &#xB7; especialidad por confirmar</p><p>Formado en el m&#xE9;todo de Isidro. Acompa&#xF1;a mini mentor&#xED;as y talleres, y da seguimiento a sus mentorados dentro de la plataforma Cenit.</p></div>
+        </article>
+        <article class="member rv">
+          <div class="ph"> <img src="/img/equipo/mentor-2.jpg" alt="Nombre por confirmar, Mentora Cenit &#xB7; especialidad por confirmar" width="960" height="1200" loading="lazy" decoding="async"> </div>
+          <div class="in"><h3>Nombre por confirmar</h3><p class="role">Mentora Cenit &#xB7; especialidad por confirmar</p><p>Formada en el m&#xE9;todo de Isidro. Acompa&#xF1;a mini mentor&#xED;as y talleres, y da seguimiento a sus mentorados dentro de la plataforma Cenit.</p></div>
+        </article>
+      <article class="member join-card rv">
+        <h3>Únete al equipo de mentores Cenit.</h3>
+        <p>¿Eres facilitador, coach o consultor? Isidro forma a cada mentor en su método y te da la plataforma para acompañar a tus mentorados.</p>
+        <a class="btn gold" href="#contacto" data-interes="Ser mentor Cenit">Quiero ser mentor Cenit</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EMPRESAS: programas en filas a la izquierda, conferencias en un panel fijo a la derecha ================= -->
+<section class="s" id="empresas" aria-labelledby="t-emp">
+  <div class="wrap emp">
+    <div class="emp-l">
+      <div class="head rv">
+        <h2 id="t-emp">Para empresas, cámaras y eventos.</h2>
+        <p class="lead">Programas prácticos para transformar habilidades humanas en resultados: comunicación, liderazgo, ventas, servicio y cultura. Cada programa se diseña según los objetivos de tu organización.</p>
+      </div>
+      <ul class="programas">
+        <li class="rv"><div><h3>Consultoría corporativa</h3><p>Diagnóstico de comunicación organizacional, cultura de servicio y experiencia del cliente, y desarrollo de habilidades comerciales.</p></div><span class="pill">RR. HH., ventas y dirección</span></li>
+        <li class="rv"><div><h3>Taller de alto impacto</h3><p>Dinámicas prácticas, material de apoyo, evaluación inicial y final, y recomendaciones para la organización.</p></div><span class="pill">4, 8 o 16 horas</span></li>
+        <li class="rv"><div><h3>Programa de liderazgo y comunicación</h3><p>Liderazgo, inteligencia emocional, comunicación no verbal, presentaciones, negociación y conversaciones difíciles.</p></div><span class="pill">Equipos de liderazgo</span></li>
+        <li class="rv"><div><h3>Paquete de mini mentorías</h3><p>Sesiones individuales para que cada persona trabaje su propio caso después del taller, con reporte de avance para el líder.</p></div><span class="pill">De 3 a 6 meses</span></li>
+      </ul>
+    </div>
+    <aside class="talks rv" aria-labelledby="t-talks">
+      <svg class="talks-cenit" viewBox="0 0 200 90" aria-hidden="true"><circle cx="100" cy="10" r="4.5" fill="#c9a961"/><circle cx="100" cy="10" r="12" fill="#c9a961" opacity=".18"/><path d="M40 90l60-62 60 62z" fill="#28356a"/><path d="M100 28l60 62h-50z" fill="#3a4a8a"/><path d="M100 28l11 11-6 2-5-3-6 4-5-2z" fill="#e8ecf5"/></svg>
+      <h3 id="t-talks">Conferencias magistrales</h3>
+      <p>Isidro ha sido maestro de ceremonias para Quaker, CONCAMIN, Amadeus, AMAV Ciudad de México y SkyTeam. Lleva estas conferencias a tu evento:</p>
+      <ul class="talks-list">
+        <li>Comunicar para inspirar</li>
+        <li>Liderazgo con presencia humana</li>
+        <li>Servicio extraordinario: lecciones desde la aviación</li>
+        <li>La imagen del líder que comunica confianza</li>
+      </ul>
+      <a class="btn gold" href="#contacto" data-interes="Conferencia para mi evento">Platiquemos tu evento</a>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= PREGUNTAS ================= -->
+<section class="s tone" id="preguntas" aria-labelledby="t-faq">
+  <div class="wrap split even top">
+    <div>
+      <h2 id="t-faq">Preguntas frecuentes.</h2>
+      <p class="lead">Si no encuentras tu respuesta, escríbeme y te contesto el mismo día hábil.</p>
+    </div>
+    <div class="faq">
+      <details><summary>¿Las sesiones son en línea o presenciales?</summary><p>Las dos. La mayoría de las mini mentorías son por videollamada; la mentoría ejecutiva y los talleres pueden ser presenciales.</p></details>
+      <details><summary>¿Cómo sé si necesito una mini mentoría o un proceso completo?</summary><p>Si tienes una fecha concreta (una presentación, una negociación), empieza con una mini mentoría. Si quieres cambiar cómo te comunicas en general, conviene la mentoría ejecutiva. En la primera conversación te lo digo con franqueza.</p></details>
+      <details><summary>¿Cuánto cuesta?</summary><p>Depende del formato, la duración y si es para ti o para tu equipo. Prefiero entender primero tu caso; en la primera conversación, sin costo, te doy una propuesta clara.</p></details>
+      <details><summary>¿Puedo trabajar directamente con Isidro?</summary><p>Sí. Isidro lleva personalmente la mentoría ejecutiva 1:1 y da mini mentorías de voz, manejo del estrés y transición de carrera.</p></details>
+      <details><summary>¿Facturan?</summary><p>Sí, emitimos factura (CFDI) para personas y empresas.</p></details>
+      <details><summary>¿Las presentaciones gratuitas tienen algún costo o registro?</summary><p>No. Puedes verlas, compartirlas y usarlas con tu equipo citando la fuente.</p></details>
+    </div>
+  </div>
+</section>
+
+<div class="sep-cenit" aria-hidden="true"><svg viewBox="0 0 160 60"><circle cx="80" cy="8" r="4" fill="#c9a961"/><circle cx="80" cy="8" r="11" fill="#c9a961" opacity=".16"/><path d="M0 60l30-16 18 6 32-34 32 34 18-6 30 16z" fill="#e3e6ee"/><path d="M80 16l32 34 18-6 30 16H86z" fill="#d3d8e6"/></svg></div>
+
+<!-- ================= CONTACTO ================= -->
+<section class="s" id="contacto" aria-labelledby="t-cto">
+  <div class="wrap">
+    <div class="closing">
+      <div class="l">
+        <h2 id="t-cto">Conversemos sobre lo que quieres lograr.</h2>
+        <p class="lead">Sin compromiso. Cuéntame tu caso o el de tu empresa y te contacto para entenderlo y proponerte el formato que te sirva. Si no somos la opción adecuada, también te lo diré.</p>
+        <ul class="contact">
+ <li>YouTube · <a href="https://www.youtube.com/user/CenitComunicaciones" target="_blank" rel="noopener">CenitComunicaciones</a></li>  <li>LinkedIn · <a href="https://www.linkedin.com/profile/view?id=130284099" target="_blank" rel="noopener">Isidro Huerta</a></li>         </ul>
+      </div>
+      <form class="f" id="form" method="post" accept-charset="UTF-8" action="https://formsubmit.co/isidrohuerta141@gmail.com" novalidate><input type="hidden" name="_subject" value="Nuevo contacto desde el sitio de Cenit"><input type="hidden" name="_template" value="table"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="https://isidrohuerta.github.io/?enviado=1#contacto">
+        <div class="trampa" aria-hidden="true"><label for="f-web">No llenar</label><input id="f-web" name="_honey" tabindex="-1" autocomplete="off"></div>
+        <div class="two">
+          <div class="fld"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" maxlength="100" autocomplete="name" placeholder="Tu nombre" required></div>
+          <div class="fld"><label for="f-correo">Correo</label><input id="f-correo" name="correo" type="email" maxlength="150" autocomplete="email" inputmode="email" placeholder="tu@empresa.com" required></div>
         </div>
-    </section>
+        <div class="fld"><label for="f-interes">Me interesa</label>
+          <select id="f-interes" name="interes">
+            <option>Mentoría ejecutiva 1:1 con Isidro</option>
+            <option>Mini mentoría</option>
+            <option>Curso en línea</option>
+            <option>Taller para mi equipo</option>
+            <option>Consultoría para mi empresa</option>
+            <option>Conferencia para mi evento</option>
+            <option>Paquete de mini mentorías para empresa</option>
+            <option>Ser mentor Cenit</option>
+          </select></div>
+        <div class="fld"><label for="f-msg">¿Qué quieres lograr?</label><textarea id="f-msg" name="mensaje" maxlength="1000" placeholder="Por ejemplo: presentar con más seguridad frente al consejo."></textarea></div>
+        <div><button class="btn gold" type="submit">Enviar mensaje</button></div>
+        <p class="ok" role="status">Gracias. Recibí tu mensaje y te contactaré pronto.</p>
+        <p class="fine">Uso tus datos solo para responderte. Consulta el <a href="/privacidad/">aviso de privacidad</a>.</p>
+      </form>
+    </div>
+  </div>
+</section>
 
-    <!-- ==================== FOOTER ==================== -->
-    <footer>
-        <p>&copy; 2025 <span>Isidro Huerta</span>. Todos los derechos reservados. | Consultoría en Liderazgo y Desarrollo Ejecutivo</p>
-    </footer>
 
-    <!-- ==================== MOBILE NAV SCRIPT ==================== -->
-    <script>
-        const navToggle = document.getElementById('nav-toggle');
-        const navLinks = document.getElementById('nav-links');
-        navToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('open');
-        });
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('open');
-            });
-        });
-    </script>
+</main>
 
+<div class="pie-cordillera" aria-hidden="true"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0 120V84l120-26 90 20 130-38 110 30 140-46 80 24L720 6l70 50 80-22 140 40 110-30 130 36 90-18 100 22v36z" fill="#121a30"/><path d="M720 6l70 50 80-22 140 40 110-30 130 36 90-18 100 22v36H760z" fill="#18213d"/></svg><span class="pie-estrella"></span></div>
+<footer class="pie">
+  <div class="wrap">
+    <div class="pie-top">
+      <a class="pie-logo" href="/" aria-label="Cenit Comunicaciones"><img src="/img/cenit-logo-blanco.svg" alt="Cenit Comunicaciones" width="601" height="240" loading="lazy"></a>
+      <div class="cols">
+        <div><b>Trabaja con Cenit</b><a href="#formas">Mentoría ejecutiva</a><a href="#resolver">Mini mentorías</a><a href="#cursos">Cursos</a><a href="#empresas">Empresas y conferencias</a></div>
+        <div><b>Contenido libre</b><a href="/presentaciones/">Presentaciones</a><a href="#redes">Redes sociales</a><a href="#isidro">Isidro Huerta</a><a href="#mentores">Mentores</a></div>
+        <div><b>Cuenta</b><a href="#contacto" data-interes="Ser mentor Cenit">Ser mentor Cenit</a><a href="/privacidad/">Aviso de privacidad</a></div>
+      </div>
+    </div>
+    <div class="legal"><span>© 2026 Cenit Comunicaciones · Isidro Huerta, fundador y CEO</span><span>Los videos de la plataforma usan datos de demostración.</span></div>
+  </div>
+</footer>
+
+<script src="/js/cenit.js?v=6ZfvreAUX_l-q579YPf9SDGw4Pp0Y4RIh1-Ma4n7p5k"></script>
+
+  <script src="/js/cenit-cielo.js?v=JtmZEipkgf0-L8WNJMjh25_o6ItIKEfZFBQq7BymYDk"></script>
+  <script>CenitCielo.montar(document.getElementById('cielo'), { parallax: true, soloAncho: true });</script>
+  <script src="/js/historia.js?v=W7xsUlu5_2MCTY64V_qJeGuxtG60Ueh_r053Ajol-YM"></script>
+
+<script>if(/[?&]enviado=1/.test(location.search)){var f=document.getElementById('form');if(f)f.classList.add('sent');}</script>
 </body>
 </html>

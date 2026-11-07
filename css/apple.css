@@ -1,0 +1,318 @@
+/* ============================================================
+   APPLE — capa de diseño estilo Apple (se carga DESPUÉS de theme.css)
+   Conserva la paleta navy + dorado. Cambia: tipografía (Inter óptica tipo SF),
+   formas, vidrio, movimiento con resortes, fondo y componentes del dashboard.
+   ============================================================ */
+
+:root {
+    --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif;
+
+    --r-card: 24px;
+    --r-lg: 28px;
+    --hairline: 1px solid rgba(26, 35, 64, .06);
+    --shadow-card: 0 1px 1px rgba(19, 26, 48, .03), 0 4px 12px rgba(19, 26, 48, .04), 0 18px 40px -12px rgba(19, 26, 48, .10);
+    --shadow-lift: 0 2px 4px rgba(19, 26, 48, .05), 0 12px 28px rgba(19, 26, 48, .10), 0 34px 60px -18px rgba(19, 26, 48, .18);
+
+    /* Curvas de movimiento: "spring" suave (entradas) y con rebote ligero (pulsaciones) */
+    --spring: cubic-bezier(.32, .72, 0, 1);
+    --bounce: cubic-bezier(.34, 1.56, .64, 1);
+}
+
+/* ---------- Tipografía ---------- */
+html { -webkit-text-size-adjust: 100%; }
+body {
+    font-family: var(--font-body);
+    font-optical-sizing: auto;
+    font-feature-settings: 'ss01', 'cv11', 'tnum' 0;
+    letter-spacing: -.011em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* (el fondo se aplica solo a las pantallas con aurora; login/home conservan el suyo) */
+}
+body:has(.animated-bg) {
+    background:
+        radial-gradient(1200px 700px at 12% -10%, rgba(40, 53, 106, .07), transparent 60%),
+        radial-gradient(900px 600px at 100% 100%, rgba(201, 169, 97, .10), transparent 55%),
+        var(--bg);
+}
+
+/* Todos los títulos pasan de serif a la grotesca "display" con tracking cerrado */
+.greeting-big, .profile-name, .detalle-nombre, .auth-brand h1, .auth-card h2,
+.hero-title, .section-title-corp, .cta-card h2,
+.stat-tile .num, .stat-item .num, .mentor-hero-card .info .num, .progress-pct, .course-card .titulo {
+    font-family: var(--font-display);
+    letter-spacing: -.035em;
+    font-weight: 700;
+}
+.greeting-big { font-size: 34px; line-height: 1.05; letter-spacing: -.04em; }
+.greeting-small { font-size: 15px; font-weight: 500; letter-spacing: -.01em; }
+
+.section-label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -.005em;
+    text-transform: none;
+    color: var(--muted);
+    margin: 28px 0 10px 4px;
+}
+
+/* ---------- Fondo: luz difusa, lenta y sin formas que "viajan" ---------- */
+.animated-bg .aurora { filter: blur(110px); border-radius: 50%; animation-timing-function: ease-in-out; }
+.animated-bg .aurora-3, .animated-bg .aurora-4 { display: none; }
+.animated-bg .aurora-1 {
+    width: 720px; height: 720px; top: -320px; left: -260px; opacity: .22;
+    animation: apLuz1 46s ease-in-out infinite alternate;
+}
+.animated-bg .aurora-2 {
+    width: 640px; height: 640px; bottom: -300px; right: -240px; opacity: .20;
+    animation: apLuz2 58s ease-in-out infinite alternate;
+}
+@keyframes apLuz1 { to { transform: translate3d(140px, 90px, 0) scale(1.08); } }
+@keyframes apLuz2 { to { transform: translate3d(-120px, -80px, 0) scale(1.10); } }
+
+/* ---------- Transición entre páginas (navegadores que la soportan) ---------- */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: apFuera .22s var(--spring) both; }
+::view-transition-new(root) { animation: apDentro .38s var(--spring) both; }
+@keyframes apFuera { to { opacity: 0; transform: scale(.992); } }
+@keyframes apDentro { from { opacity: 0; transform: translateY(10px); } }
+
+/* ---------- Tarjetas y superficies ---------- */
+.card-sesion, .progress-card, .tasks-card, .course-card, .form-card, .stat-tile,
+.mentor-hero-card, .chat-item, .alert-item {
+    border-radius: var(--r-card);
+    border: var(--hairline);
+    box-shadow: var(--shadow-card);
+}
+@media (hover: hover) {
+    .card-sesion:hover, .mentor-hero-card:hover, .stat-tile:hover { box-shadow: var(--shadow-lift); }
+}
+
+/* Pulsación: todo lo tocable se hunde un poco, como en iOS */
+a, button { -webkit-tap-highlight-color: transparent; }
+.ap-card[href], .ap-focus, .ap-row, .ap-bubble, .card-sesion, .stat-tile, .chat-item, .task-row-detalle {
+    transition: transform .45s var(--spring), box-shadow .45s var(--spring), background .25s;
+}
+.ap-card[href]:active, .ap-focus:active, .ap-row:active, .ap-bubble:active,
+.card-sesion:active, .stat-tile:active, .chat-item:active { transform: scale(.975); transition-duration: .15s; }
+
+/* ---------- Botones ---------- */
+.btn-auth, .btn-save-small { border-radius: 999px; font-weight: 600; letter-spacing: -.01em; }
+.btn-auth:active { transform: scale(.97); }
+
+/* ---------- Barra inferior: píldora de vidrio flotante ---------- */
+.bottom-nav {
+    background: transparent;
+    border-top: 0;
+    padding: 0 16px calc(14px + env(safe-area-inset-bottom));
+    pointer-events: none;
+}
+.bottom-nav-inner {
+    pointer-events: auto;
+    max-width: 440px !important;
+    margin: 0 auto;
+    padding: 6px;
+    gap: 2px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .72);
+    -webkit-backdrop-filter: saturate(200%) blur(24px);
+    backdrop-filter: saturate(200%) blur(24px);
+    border: 1px solid rgba(255, 255, 255, .7);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .8) inset, 0 10px 30px rgba(19, 26, 48, .16), 0 2px 6px rgba(19, 26, 48, .08);
+}
+.bottom-nav .nav-item {
+    flex: 1;
+    padding: 8px 6px;
+    border-radius: 999px;
+    font-size: 10.5px;
+    letter-spacing: 0;
+    transition: background .35s var(--spring), color .25s, transform .35s var(--bounce);
+}
+.bottom-nav .nav-item i { font-size: 21px; transition: transform .4s var(--bounce); }
+.bottom-nav .nav-item.active {
+    background: rgba(26, 35, 64, .07);
+    color: var(--navy);
+}
+.bottom-nav .nav-item.active i { color: var(--gold-deep); transform: translateY(-1px) scale(1.06); }
+.bottom-nav .nav-item.active::after { display: none; }
+.bottom-nav .nav-item:active { transform: scale(.9); background: rgba(26, 35, 64, .1); }
+@media (min-width: 768px) { .bottom-nav-inner { max-width: 480px !important; } }
+
+/* ---------- Revelado al hacer scroll ---------- */
+html.has-js .ap-reveal {
+    opacity: 0;
+    transform: translateY(26px) scale(.985);
+    filter: blur(6px);
+    transition: opacity .8s var(--spring), transform .9s var(--spring), filter .8s var(--spring);
+    transition-delay: calc(var(--i, 0) * 70ms);
+}
+html.has-js .ap-reveal.in { opacity: 1; transform: none; filter: none; }
+
+/* ============================================================
+   DASHBOARD DEL MENTORADO
+   ============================================================ */
+.ap-hero { padding: 36px 24px 6px; max-width: 480px; margin: 0 auto; }
+.ap-eyebrow {
+    font-size: 13px; font-weight: 600; color: var(--muted);
+    letter-spacing: -.005em; margin-bottom: 8px;
+}
+.ap-eyebrow::first-letter { text-transform: uppercase; }
+.ap-eyebrow.gold { color: var(--gold-deep); text-transform: none; margin-bottom: 6px; }
+.ap-title {
+    font-size: clamp(38px, 11vw, 52px);
+    line-height: 1.02; font-weight: 700; letter-spacing: -.045em; color: var(--navy);
+    animation: apTitulo 1.1s var(--spring) both;
+}
+.ap-title span {
+    background: linear-gradient(100deg, var(--gold-deep) 0%, var(--gold) 55%, var(--gold-light) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    padding-bottom: .08em;
+}
+@keyframes apTitulo { from { opacity: 0; transform: translateY(18px); filter: blur(8px); } }
+
+.ap-grid { display: flex; flex-direction: column; gap: 14px; padding-top: 18px; }
+.ap-grid > * { animation: none !important; }   /* anula el stagger anterior: el revelado lo hace .ap-reveal */
+
+.ap-card {
+    display: block; position: relative; text-decoration: none; color: inherit;
+    background: rgba(255, 255, 255, .86);
+    -webkit-backdrop-filter: blur(20px) saturate(160%); backdrop-filter: blur(20px) saturate(160%);
+    border: var(--hairline); border-radius: var(--r-lg);
+    padding: 22px; box-shadow: var(--shadow-card);
+}
+.ap-card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.ap-card-title { font-size: 19px; font-weight: 650; letter-spacing: -.025em; color: var(--navy); }
+.ap-card-sub { font-size: 13.5px; color: var(--muted); letter-spacing: -.005em; margin-top: 2px; }
+.ap-link { font-size: 14px; font-weight: 600; color: var(--gold-deep); text-decoration: none; }
+
+/* Tarjeta destacada: la acción siguiente (navy con luz dorada) */
+.ap-focus {
+    display: block; text-decoration: none; color: #fff; position: relative; overflow: hidden;
+    border-radius: var(--r-lg); padding: 26px 24px 22px;
+    background:
+        radial-gradient(520px 260px at 100% 0%, rgba(201, 169, 97, .38), transparent 60%),
+        radial-gradient(420px 300px at 0% 120%, rgba(74, 107, 176, .38), transparent 60%),
+        linear-gradient(160deg, var(--navy-soft) 0%, var(--navy) 55%, var(--navy-dark) 100%);
+    box-shadow: 0 2px 4px rgba(19, 26, 48, .1), 0 24px 48px -14px rgba(19, 26, 48, .5);
+}
+.ap-focus::before {   /* brillo que cruza lentamente, como el vidrio de los productos Apple */
+    content: ""; position: absolute; inset: -40% -60%;
+    background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, .09) 50%, transparent 58%);
+    transform: translateX(-60%); animation: apBrillo 7s var(--spring) 1.2s infinite;
+    pointer-events: none;
+}
+@keyframes apBrillo { 0% { transform: translateX(-60%); } 38%, 100% { transform: translateX(60%); } }
+.ap-focus.calm { cursor: default; }
+.ap-focus-label { font-size: 13px; font-weight: 600; color: var(--gold-light); display: flex; align-items: center; gap: 7px; margin-bottom: 14px; }
+.ap-focus-title { font-size: 26px; line-height: 1.12; font-weight: 700; letter-spacing: -.035em; }
+.ap-focus-desc {
+    font-size: 15px; color: rgba(255, 255, 255, .72); margin-top: 8px; line-height: 1.45;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.ap-focus-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 20px; gap: 10px; }
+.ap-go { font-size: 14px; font-weight: 600; color: #fff; display: inline-flex; align-items: center; gap: 6px; }
+.ap-go i { transition: transform .4s var(--spring); }
+.ap-focus:hover .ap-go i { transform: translateX(4px); }
+
+.ap-pill {
+    display: inline-flex; align-items: center; font-size: 12.5px; font-weight: 600; letter-spacing: -.005em;
+    padding: 6px 12px; border-radius: 999px; background: rgba(255, 255, 255, .14); color: #fff;
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+.ap-pill.late { background: rgba(255, 120, 100, .22); color: #ffd2cb; }
+.ap-pill.sm { font-size: 11.5px; padding: 4px 10px; background: rgba(26, 35, 64, .06); color: var(--navy); }
+.ap-pill.sm.late { background: rgba(179, 56, 44, .1); color: var(--danger); }
+
+/* Anillo de avance */
+.ap-progress { display: flex; align-items: center; gap: 22px; }
+.ap-ring { position: relative; width: 132px; height: 132px; flex: none; }
+.ap-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ap-ring circle { fill: none; stroke-width: 9; }
+.ap-ring .track { stroke: rgba(26, 35, 64, .07); }
+.ap-ring .bar { stroke: url(#gradOro); stroke-linecap: round; transition: stroke-dashoffset 1.8s var(--spring) .2s; filter: drop-shadow(0 2px 6px rgba(201, 169, 97, .45)); }
+.ap-ring-num {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 38px; font-weight: 700; letter-spacing: -.05em; color: var(--navy); font-variant-numeric: tabular-nums;
+}
+.ap-ring-num small { font-size: 16px; font-weight: 600; color: var(--muted); letter-spacing: 0; margin: 6px 0 0 1px; align-self: center; }
+.ap-progress-info { min-width: 0; flex: 1; }
+.ap-mini-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 16px; }
+.ap-mini-stats > * { text-decoration: none; display: block; }
+.ap-mini-stats b { display: block; font-size: 22px; font-weight: 700; letter-spacing: -.04em; color: var(--navy); font-variant-numeric: tabular-nums; }
+.ap-mini-stats .warn b { color: var(--danger); }
+.ap-mini-stats span { font-size: 11px; color: var(--muted); font-weight: 500; }
+
+/* Gráfica semanal */
+.ap-bars { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; align-items: end; height: 120px; }
+.ap-bar-col { display: flex; flex-direction: column; align-items: center; gap: 8px; height: 100%; }
+.ap-bar-track { flex: 1; width: 100%; display: flex; align-items: flex-end; }
+.ap-bar-fill {
+    width: 100%; height: 0; border-radius: 10px;
+    background: linear-gradient(180deg, var(--gold-light), var(--gold));
+    transition: height 1.1s var(--spring); transition-delay: calc(var(--n, 0) * 60ms + .15s);
+}
+.ap-bar-fill.empty { background: rgba(26, 35, 64, .08); }
+.ap-bar-col.today .ap-bar-fill:not(.empty) { background: linear-gradient(180deg, var(--navy-soft), var(--navy)); }
+.ap-bar-col span { font-size: 11.5px; font-weight: 600; color: var(--muted); }
+.ap-bar-col.today span { color: var(--navy); }
+.in .ap-bar-fill, .ap-in .ap-bar-fill { height: var(--h); }
+html:not(.has-js) .ap-bar-fill { height: var(--h); }
+
+/* Mentor */
+.ap-mentor { display: flex; align-items: center; gap: 16px; padding: 18px 20px; }
+.ap-mentor .avatar-md { width: 56px; height: 56px; flex: none; box-shadow: 0 0 0 3px #fff, 0 0 0 4px rgba(201, 169, 97, .55); }
+.ap-mentor-info { flex: 1; min-width: 0; }
+.ap-mentor-cta { display: flex; align-items: center; gap: 10px; }
+.ap-icon-btn {
+    width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--navy); color: #fff; font-size: 17px; transition: transform .4s var(--bounce);
+}
+.ap-mentor:hover .ap-icon-btn { transform: scale(1.1) rotate(-6deg); }
+
+.ap-bubble {
+    display: flex; gap: 12px; align-items: center; text-decoration: none; color: var(--navy);
+    padding: 14px 18px; border-radius: 22px; background: rgba(201, 169, 97, .14); border: 1px solid rgba(201, 169, 97, .28);
+    font-size: 14.5px; line-height: 1.35;
+}
+.ap-bubble i { color: var(--gold-deep); font-size: 18px; }
+.ap-bubble span { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+
+.ap-goal p { font-size: 17px; line-height: 1.5; letter-spacing: -.02em; color: var(--navy); margin: 0; font-weight: 500; }
+
+/* Lista */
+.ap-list { padding-bottom: 8px; }
+.ap-row { display: flex; align-items: center; gap: 14px; padding: 14px 0; text-decoration: none; color: inherit; border-top: 1px solid rgba(26, 35, 64, .06); border-radius: 0; }
+.ap-row:first-of-type { border-top: 0; }
+.ap-row:active { transform: none; opacity: .6; }
+.ap-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(26, 35, 64, .18); flex: none; }
+.ap-dot.today { background: var(--gold); box-shadow: 0 0 0 4px rgba(201, 169, 97, .22); }
+.ap-dot.late { background: var(--danger); box-shadow: 0 0 0 4px rgba(179, 56, 44, .14); }
+.ap-row-text { flex: 1; min-width: 0; }
+.ap-row-title { font-size: 16px; font-weight: 600; letter-spacing: -.02em; color: var(--navy); }
+.ap-row-sub { font-size: 13px; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Programa */
+.ap-program { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: left; }
+.ap-program b { display: block; font-size: 40px; font-weight: 700; letter-spacing: -.05em; color: var(--navy); line-height: 1; font-variant-numeric: tabular-nums; }
+.ap-program b.txt { font-size: 19px; letter-spacing: -.03em; line-height: 1.15; padding-top: 14px; }
+.ap-program span { display: block; font-size: 13px; color: var(--muted); margin-top: 6px; }
+.ap-program > div + div { border-left: 1px solid rgba(26, 35, 64, .08); padding-left: 16px; }
+
+@media (min-width: 768px) {
+    .ap-hero { max-width: 720px; padding-left: 24px; }
+    .ap-progress { padding: 28px; }
+}
+
+/* ---------- Movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+    html.has-js .ap-reveal { opacity: 1; transform: none; filter: none; transition: none; }
+    .ap-title, .ap-focus::before, .animated-bg .aurora { animation: none !important; }
+    .ap-ring .bar, .ap-bar-fill { transition: none; }
+    ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}
+
+/* Días y horas en el proceso */
+.ap-tiempo b { display: flex; align-items: baseline; gap: 4px; flex-wrap: wrap; }
+.ap-tiempo b .n { font-size: 40px; font-weight: 700; letter-spacing: -.05em; color: var(--navy); line-height: 1; display: inline; margin: 0; }
+.ap-tiempo b small { font-size: 15px; font-weight: 600; letter-spacing: -.01em; color: var(--muted); margin-right: 6px; }
